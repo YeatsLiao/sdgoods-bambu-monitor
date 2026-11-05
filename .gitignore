@@ -1,0 +1,12 @@
+build*/
+dist/
+sdkconfig
+sdkconfig.old
+managed_components/
+node_modules/
+__pycache__/
+main/bambu/config.local.h
+tools/fonts/*.ttf
+*.log
+build-*.defaults
+docs/history/
