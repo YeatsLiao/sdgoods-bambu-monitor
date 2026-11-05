@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: MIT
+ * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ */
+#pragma once
+#include "app_config.h"
+// NULL on success. Empty passwords retain the old value only for the same device/network.
+const char *prov_form_parse(const char *body, const app_config_t *old,
+                            app_config_t *out, bool *force);

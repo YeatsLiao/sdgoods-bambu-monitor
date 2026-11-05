@@ -1,0 +1,64 @@
+/* SPDX-License-Identifier: MIT
+ * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ */
+// main/app_config.h —— 运行时配置 (NVS 持久化 + 编译期默认值)
+//
+// 优先级: NVS 中已保存的配置 > config.h 编译期默认值 > 空白(未配置)。
+// 未配置的固件开机直接进入配网模式 (见 wifi_prov)，用户通过手机网页
+// 填写 WiFi 与打印机信息，保存到 NVS 后重启生效——无需重新编译。
+#pragma once
+
+#include "esp_err.h"
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#define APP_COMP_MAX 9        // 可选组件总数 (编号 1-9)
+
+typedef struct {
+    char wifi_ssid[33];        // 2.4GHz WiFi 名称
+    char wifi_pass[65];        // WiFi 密码
+    char printer_ip[16];       // 打印机局域网 IP
+    char printer_serial[32];   // 打印机序列号 (15 位)
+    char access_code[33];      // 打印机访问码 (8 位, 仅局域网模式)
+    uint8_t ui_style;          // UI 风格 (STYLE_BAMBU..STYLE_APPLE, 1-12)
+    uint8_t lang;              // 界面语言 (LANG_EN=1 / LANG_CN=2)
+    uint8_t backlight;         // 背光亮度 10-100 (%), 设备设置页可调
+    uint8_t screen_off_min;    // 空闲自动熄屏分钟数, 0=关闭; 设备设置页可调
+    uint8_t comp_order[APP_COMP_MAX];  // 有序组件子集 (值 1-9), 前 comp_count 个有效
+    uint8_t comp_count;                // 0 = 未配置, 各风格使用自身默认顺序
+} app_config_t;
+
+// 初始化 NVS 并加载配置 (NVS 无记录时回退到 config.h 编译期默认值)
+esp_err_t app_config_init(void);
+
+// 全局配置单例 (app_config_init 之后有效)
+const app_config_t *app_config_get(void);
+
+// NVS 中是否已保存过配置 (决定开机是否直接进配网模式)
+bool app_config_is_provisioned(void);
+
+// 保存配置到 NVS (整体覆盖, 要求网络配置完整)
+esp_err_t app_config_save(const app_config_t *cfg);
+
+// Trial configuration survives reboot; stable network credentials remain intact.
+esp_err_t app_config_stage(const app_config_t *cfg);
+bool app_config_has_trial(void);
+esp_err_t app_config_confirm_trial(void);
+esp_err_t app_config_rollback_trial(void);
+
+// 只保存显示偏好 (风格/语言/亮度/熄屏/组件顺序), 不要求网络配置完整 ——
+// 设备设置页调整亮度/熄屏时使用, 未配网状态也允许调
+esp_err_t app_config_save_display(const app_config_t *cfg);
+
+// 设备设置页调亮度/熄屏: 更新运行时单例并写入 NVS (背光 10-100, 熄屏 0-60 分钟, 0=关)
+esp_err_t app_config_set_display(uint8_t backlight, uint8_t screen_off_min);
+
+// 读取运行时组件顺序: 把已配置的有序子集写入 out (最多 max 个), 返回写入个数;
+// 未配置 (comp_count==0) 时返回 0, 调用方应回落到本风格默认顺序。
+int app_config_comp_order(int *out, int max);
+
+// 解析配网页提交的 CSV 顺序串 (如 "5,4,1,2,6,8") 到 cfg->comp_order/comp_count。
+// 校验编号 1-9、去重、上限 APP_COMP_MAX; 空串或全非法 -> comp_count=0 (走默认)。
+// 返回解析出的有效个数。
+int app_config_set_comp_order_csv(app_config_t *cfg, const char *csv);
