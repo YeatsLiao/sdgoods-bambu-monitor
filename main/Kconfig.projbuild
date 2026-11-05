@@ -1,0 +1,9 @@
+menu "Bambu Monitor"
+config BAMBU_BASELINE
+    bool "Build minimal official-compatible baseline"
+    default n
+config BAMBU_SKIN_COUNT
+    int "Number of included skins"
+    range 1 18
+    default 18
+endmenu
