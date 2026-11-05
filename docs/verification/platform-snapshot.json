@@ -1,0 +1,335 @@
+{
+  "reference": "D:\\2.Project\\SDGOODS\\sdgoods-radio",
+  "matches": true,
+  "files": [
+    {
+      "path": "components/sdgoods_board/CMakeLists.txt",
+      "sha256": "170cc6308dea40d41b6318f9c0c8937d9ad005c3eda4ddf92b1d5acec1b8f7b4"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/cn_font_14.c",
+      "sha256": "45c20c96d77261a0d2576c5dc1e83f4115d8a78c7989dd10d669de0cee25af87"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/cn_font_16.c",
+      "sha256": "1c92e61bb52f1833d4cdb80a795cedec71a619fc508d03ca29d794f70e81b866"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/net_font_20.c",
+      "sha256": "a992a141681526d3e5691d2844413fd67563b1cbef7711273912e52404154231"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/OFL.txt",
+      "sha256": "4f20c9a710136b0e331ab647035b2d39450b5421cfb3f812856e4949559c09d9"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/README.md",
+      "sha256": "955d7ebbfaace54f089dc356f3da03cc359f77d0712fbadc74c1d84161fae3e5"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/si_yuan_black_icon_14.c",
+      "sha256": "da2e5e7217c88ef05d44752f9355508caf660fd4fe1580b642c30b9119963c3e"
+    },
+    {
+      "path": "components/sdgoods_board/fonts/si_yuan_black_icon_16.c",
+      "sha256": "69e106f2ed6c0b54394ad0c21e328eea448f7dad2ba86d1985e9a06fee4313cc"
+    },
+    {
+      "path": "components/sdgoods_board/idf_component.yml",
+      "sha256": "4e593a809ae5642a05eccf60d17dea4fd88f6c02ee7d3aee5ab8231ea28ce332"
+    },
+    {
+      "path": "components/sdgoods_board/include/board_pins.h",
+      "sha256": "dbd1a660e650f6e351d2edcefcb7a6af1d40d47f6e27dfbc2e3b550a2e0eae1f"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_app_shell.h",
+      "sha256": "e2e1150d49ae43a8fff772123e0f00435adfedecd6276105e65b902fbe642934"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_audio.h",
+      "sha256": "4688e4e9b93f6dc655ecbbad301cf7b713a752ecc738260ef8960765b494e135"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_ble.h",
+      "sha256": "ae76a916796438661eff17f17fd48bc92aefa73e1cd2af9f1d88488fb662ebc2"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_board.h",
+      "sha256": "0293400df9db58ab3f07491cd68aa1d8d59e8181cfaa8c49631d02592a420c63"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_boot_skip.h",
+      "sha256": "c5f561109d062de7c417f9bfc3e3bce81679247e40d34e9768f9b2b5c326308a"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_caps.h",
+      "sha256": "7ee43860322c908851ce4f4d29792e1f6e6e32fefff757a887ebe07e386cb822"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_console.h",
+      "sha256": "4662c68e41f05027bc106d8e6109067eef0c9cc31ca1edefc76f48c79aead2f2"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_gesture.h",
+      "sha256": "d02b9247c93a86d5a2c1c2727635a7b67e0fed16496c6e60a1961670686bcddb"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_hooks.h",
+      "sha256": "2e91c1cd9dd095d3e4c870fca46881066d03f3fb07b50c4942d441b2acb653b7"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_hw_info.h",
+      "sha256": "6d6066ba68f756c9a97d41f11c164af47d83901f3746c9291abe88c21756352f"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_i18n.h",
+      "sha256": "ed24d075cb55db5f01a127625c4bbd2fab863e4deeb4b9856327508a2ecb82fd"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_input.h",
+      "sha256": "06eb0aea3aa5b24f6b5ca0137ac5d11631836386edf3ebbb91486b0d16b64c0e"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_jpeg.h",
+      "sha256": "266b8fcb1cd5ac13f4a1cb5c6e39223e73ce56f5fbca2230a3126ab6a914fa29"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_lcd.h",
+      "sha256": "7c28e435049d25d0a4213289bf16b2a677cefdcddeaba83a7cb47d71c8f44376"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_lvgl.h",
+      "sha256": "682d5e24bc469f7e8462417d8f076a1cd8c90c12e414dcee2d4d8a8686b86810"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_nvs.h",
+      "sha256": "b378888f773ffc1079da0608263bd984a9db8b6204993bdc11386602a090c38c"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_power.h",
+      "sha256": "e2ca10ffbcd896fc781b0e36e1d717f00aba54d7b71f0cc981f0b98dee94fd45"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_screenshot.h",
+      "sha256": "0d1cc3920115c8f24668e2329f5fa2f0161335ce4e861dc7e786fdb2c86c3c65"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_swipe_back.h",
+      "sha256": "1e4c8b53cdb8585e3dc3e3c66d473ea2669e53d2c8fe1f89135bd60e6d5ef1a4"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_swipe_up.h",
+      "sha256": "3fc54fc3be7a9695426f4cd0e5a5cea729f0d51bcc3a15ee84660f7e56297121"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_tap.h",
+      "sha256": "f78e7282d737c462e2774ff3d34f173f83edb7222906de3afcd4c0354b36528b"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_ui.h",
+      "sha256": "f168f334d3d278a19506904a1f828475b1094e1ea266c431fd59ebf7057fcdb7"
+    },
+    {
+      "path": "components/sdgoods_board/include/sdgoods_wifi.h",
+      "sha256": "9af628766dda0b217407dc12877d425aeae8360c9cd89b855b7161139f512654"
+    },
+    {
+      "path": "components/sdgoods_board/Kconfig",
+      "sha256": "75c3baf96113e50c9a15c428078074ae0f1df072ba9bf4acb7530749631ff9cd"
+    },
+    {
+      "path": "components/sdgoods_board/lcd/esp_lcd_st77916/esp_lcd_st77916.c",
+      "sha256": "a6611a379091a371cb143a9d387998c3438643da2e5381e8a27d6a0010fc1968"
+    },
+    {
+      "path": "components/sdgoods_board/lcd/esp_lcd_st77916/esp_lcd_st77916.h",
+      "sha256": "302bd684e023cbd56d142dbe70e15158ec9f078e3d2cf577481193dd84870734"
+    },
+    {
+      "path": "components/sdgoods_board/lcd/sdgoods_lcd.c",
+      "sha256": "3600e9c6ce6b0813a28213c0b83bb23dfd613033522533b042950d67d276ac77"
+    },
+    {
+      "path": "components/sdgoods_board/lcd/st77916_vendor_init.inc",
+      "sha256": "dc68629ebac12bad38eeb320082ecd78f65ac9427750be5304959f30495ffc34"
+    },
+    {
+      "path": "components/sdgoods_board/LICENSE",
+      "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_app_shell.c",
+      "sha256": "39f69a48ab93de226301f60464ecd2f0255741d9cc73d8adf093458dfe2e1d6a"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_audio.c",
+      "sha256": "1b8d003189c6d54eb0f07fc0101879bc483f445f2d0e6b94acc444afff0bec51"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_ble.c",
+      "sha256": "522533a21e029f68a280c1ec6f8afcc4ea02da90ad786a771c4c6972c87943ae"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_boot_skip.c",
+      "sha256": "2955126506609247ca1cd82a4a1b5dc146519b1c9bdc41e4700aa4da04637222"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_caps.c",
+      "sha256": "4ebdd68a49eed5dae9be56e4ad2d7430bbb783bd83d61eb6479d195fd244ad5b"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_console.c",
+      "sha256": "644eea3900b322947e9b8147405d14329a4b085808a74457ad5927977c371d9a"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_gesture.c",
+      "sha256": "7df25c75067a474c4721937f70151f1a09ae9355a80893d002e37b524e15cec2"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_hooks.c",
+      "sha256": "28e11dac2901135601cdbf59766ba2ae415437708f9081f0a6f83764669b5adf"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_hw_info.c",
+      "sha256": "ebac76c862c3bc41176ae5cb5349faa4fad83f133f787a23df12b3723e883818"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_i18n.c",
+      "sha256": "b9fc79c54b6ae4fef9c35cb960ea5031847079fd39a5bdc285c4c75e84613b81"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_input.c",
+      "sha256": "81fb4cda5c9eab9f95342d84b862893291f007d1eaba7a367d19bfbb8781844d"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_jpeg.cpp",
+      "sha256": "f92b47066fb6159f323af3996eb3e012b01a1907deba62c753fc20bb635e069e"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_lvgl.c",
+      "sha256": "e80427b8609b7ade187e5bc0c48bacfc81c7e6b0e73d51c3eb68e3b464ff5eaa"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_nvs.c",
+      "sha256": "4fb59eb7a3a5a2d7a003cba986ddf449ca58ec21de01f11642bcba86ca4217e3"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_power.c",
+      "sha256": "4012167dcbbe69ad7e4da3bf60e9975f509ec555147fd5d3da5f460363275dd8"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_screenshot.c",
+      "sha256": "99a374e20a482f712807a6afb334d2ad33bd02358a82bb705b6daba339e2dc32"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_swipe_back.c",
+      "sha256": "3a7c15cbeba910a466b7de8f766812a9d39f49907f8607d41c141bb29431141b"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_swipe_up.c",
+      "sha256": "f637357fcbb22eb960ecbcb3c94d62df0fcb1c79b2ace71ac2522fa8df5cb693"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_tap.c",
+      "sha256": "38d185c74feffc1653502ccf386f195ff15aa2e9accc9cf2ecca03549061b9fd"
+    },
+    {
+      "path": "components/sdgoods_board/src/sdgoods_wifi.c",
+      "sha256": "c0d4bf8cf81263ebeddde9047d44e16e9b076d3f8efa5a504cc605e150b393cb"
+    },
+    {
+      "path": "components/sdgoods_launcher/CMakeLists.txt",
+      "sha256": "f3c14c5fe984e48ac37c70b4e023acbf663e4b2dfa4561783d379319f9e3056c"
+    },
+    {
+      "path": "components/sdgoods_launcher/include/sdgoods_app_sdk.h",
+      "sha256": "7e38a42f1ff1d2953e6f3e21cbd6189ef98c1bf51d73f97d3de536d3c5332497"
+    },
+    {
+      "path": "components/sdgoods_launcher/include/sdgoods_cc.h",
+      "sha256": "be26230168d80702c214c880feab212ed34d785fd1c98404cfa33915a41b6a2d"
+    },
+    {
+      "path": "components/sdgoods_launcher/include/sdgoods_device_mode.h",
+      "sha256": "6ec3e039af31cfd47bd98d6f3b07434ec094c4dad9e5145ec0769fca03687ef3"
+    },
+    {
+      "path": "components/sdgoods_launcher/include/sdgoods_launcher.h",
+      "sha256": "d3f70f2b7e38cf8dafad92a69c052883d5abb0160b13310af8977d8388984773"
+    },
+    {
+      "path": "components/sdgoods_launcher/include/sdgoods_slot_cover.h",
+      "sha256": "ef070b62378376de94c261718789b8f8b2cbe35a580f0da5bb2a06c905773695"
+    },
+    {
+      "path": "components/sdgoods_launcher/Kconfig",
+      "sha256": "6f86b20da8eb363f6b13363bce2c1fefb2bcdf069949cf77c625b40885add77c"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/app_sdk.c",
+      "sha256": "a1c1b1fb7456efb156a49fd6559581ef64f8db6c83047963ea8c0422119deb5d"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/device_mode.c",
+      "sha256": "e500fe0bbaa123946783c882db1d2227067185426ed9edfaa398701271ebb16b"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/launcher.c",
+      "sha256": "6df7a32435de165a2a285563534c5ba1b4cb2c33c78cb808e2eff0cd5cbc1a4a"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/sdgoods_cc.c",
+      "sha256": "abe74caa32023428d5628f162e69343cbf94ed2af11fb1126633e27c5ff9ae78"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/sdgoods_launcher_int.h",
+      "sha256": "fc2f0319948b59607d619ee526ea2968a3e73efc3bb75931a07b428d46adcf48"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/slot_cover.c",
+      "sha256": "408c3ad0181f9e4d249e87841b6343d97956471e8d56c768464eb5d0e009026b"
+    },
+    {
+      "path": "components/sdgoods_launcher/src/slot_manifest.c",
+      "sha256": "52ecdbdaf31085bd421e10e566896730ed7de429120902e01a3d74b98505d319"
+    },
+    {
+      "path": "components/sdgoods_launcher/tools/gen_app_info.py",
+      "sha256": "fdc6e177f573ec5473c7c4462da341c317a440c72496850e6e558286c5bceb53"
+    },
+    {
+      "path": "components/jpegenc/CMakeLists.txt",
+      "sha256": "0747c1fca9be38332536b0c83e03266fcee2d87c379d583a53da37752bc199e9"
+    },
+    {
+      "path": "components/jpegenc/JPEGENC.cpp",
+      "sha256": "e7b516e04385ca3f34de8994257b13d483a30f0a4dbfa5c59bf18b7202a0f7c2"
+    },
+    {
+      "path": "components/jpegenc/JPEGENC.h",
+      "sha256": "6503fa168189d8726f95eeec416c97536f271427ff248eec243aca4de6e8e46b"
+    },
+    {
+      "path": "components/jpegenc/jpegenc.inl",
+      "sha256": "848e2582f3d6048638234e591b9dabf32da26b59604240ece1ff1ede5da1275d"
+    },
+    {
+      "path": "platform/partitions.csv",
+      "sha256": "492169aecc5a1b9f6a44c2f67a6afd279bf6d9ef0c0d8181d388e880cc79489d"
+    },
+    {
+      "path": "platform/prebuilt/bootloader.bin",
+      "sha256": "14d86c17e4787a756451ba5d0d42a36500ea574852d2c4b0e8a6050407ee45e2"
+    },
+    {
+      "path": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "path": "platform/prebuilt/README.md",
+      "sha256": "a7ddedf4ce1688b751a2ee6cc6b49553897ee404a1ea8c76ae3eb68159e0b9ed"
+    }
+  ],
+  "differences": []
+}

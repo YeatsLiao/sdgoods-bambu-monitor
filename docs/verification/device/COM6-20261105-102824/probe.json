@@ -1,0 +1,50 @@
+{
+  "port": "COM6",
+  "chip": "ESP32-S3",
+  "factoryAppId": "SDGOODS_RADIO",
+  "officialLauncher": false,
+  "slots": [
+    {
+      "slot": 0,
+      "name": "ota_0",
+      "offset": 3276800,
+      "offsetHex": "0x320000",
+      "size": 3145728,
+      "appId": "ZOMBIE",
+      "emptyHeader": false,
+      "encrypted": false
+    },
+    {
+      "slot": 1,
+      "name": "ota_1",
+      "offset": 6422528,
+      "offsetHex": "0x620000",
+      "size": 3145728,
+      "appId": null,
+      "emptyHeader": true,
+      "encrypted": false
+    },
+    {
+      "slot": 2,
+      "name": "ota_2",
+      "offset": 9568256,
+      "offsetHex": "0x920000",
+      "size": 3145728,
+      "appId": null,
+      "emptyHeader": true,
+      "encrypted": false
+    },
+    {
+      "slot": 3,
+      "name": "ota_3",
+      "offset": 12713984,
+      "offsetHex": "0xc20000",
+      "size": 3145728,
+      "appId": null,
+      "emptyHeader": true,
+      "encrypted": false
+    }
+  ],
+  "recommended": null,
+  "flashWritten": false
+}

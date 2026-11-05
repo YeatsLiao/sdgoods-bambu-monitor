@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "updated": "2026-11-05",
+  "normativeSpec": "SPEC.md",
+  "firmwareAcceptance": "software-checked-device-pending",
+  "imageRevision": "four-page-references-20261105",
+  "pages": [
+    {
+      "page": 1,
+      "role": "overview",
+      "file": "page-1-overview.png",
+      "sha256": "09f7be1a24f1a0a048331a4981df58b6d328d14a608b77124271b219d1dcc1f7",
+      "sourceOriginal": "../../assets/generated-originals/exec-f6fc4c09-0921-46fd-9eb7-1190427ea7d6.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "型号为必需动态文字层，示意 P1S 不可烘焙成实际型号"
+    },
+    {
+      "page": 2,
+      "role": "ams",
+      "file": "page-2-ams.png",
+      "sha256": "37e15988dda2b3ed95b7b2f3ed9748a85760dbf2a47c58e16d0ff564535b7daf",
+      "sourceOriginal": "../../assets/generated-originals/exec-bf89db1e-8d1d-4f7d-89ac-5756e402d7f1.png",
+      "status": "user-approved-reference",
+      "note": "外置摘要已移除，四页点第二高亮；猫咪保留。05第4槽未知余量空柱，实际已知材质名仍须由程序显示。"
+    },
+    {
+      "page": 3,
+      "role": "external-ht",
+      "file": "page-3-external-ht.png",
+      "sha256": "2d0eff85682f6aa241e9f1ba096904e3355e161678949247cf0f7054df152bdf",
+      "sourceOriginal": "../../assets/generated-originals/exec-2025fdb4-40ea-4732-81bc-0073679c7322.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "外置上区 + HT 主区；缺失值按 --，只监控"
+    },
+    {
+      "page": 4,
+      "role": "details",
+      "file": "page-4-details.png",
+      "sha256": "09363610645be859afb442fab81f415214270b527dbae5e943250a0960fc56cf",
+      "sourceOriginal": "../../assets/generated-originals/exec-b3757a5d-f4a9-497a-93fe-daffd3735183.png",
+      "status": "user-approved-reference",
+      "note": "已改为第四页标题与四页点；实时型号和读数由程序绘制。"
+    }
+  ],
+  "styles": [
+    {
+      "id": 1,
+      "name": "大字进度"
+    },
+    {
+      "id": 2,
+      "name": "点阵终端"
+    },
+    {
+      "id": 3,
+      "name": "像素工坊"
+    },
+    {
+      "id": 4,
+      "name": "猫咪监工"
+    },
+    {
+      "id": 5,
+      "name": "夜班打印室"
+    },
+    {
+      "id": 6,
+      "name": "彩色料仓"
+    }
+  ],
+  "requiredCatAssets": [
+    {
+      "role": "overview-printer-with-model-anchor",
+      "status": "runtime-v0.3.3-candidate-device-review-pending"
+    },
+    {
+      "role": "cute-peeking-cat-ams",
+      "status": "runtime-v0.3.3-candidate-device-review-pending"
+    },
+    {
+      "role": "cute-cat-external-ht",
+      "status": "runtime-v0.3.3-candidate-device-review-pending"
+    },
+    {
+      "role": "cute-cat-details",
+      "status": "runtime-v0.3.3-candidate-device-review-pending"
+    }
+  ],
+  "runtimeCandidate": "0.3.3"
+}

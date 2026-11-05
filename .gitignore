@@ -10,3 +10,4 @@ tools/fonts/*.ttf
 *.log
 build-*.defaults
 docs/history/
+docs/verification/preview/
