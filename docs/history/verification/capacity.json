@@ -1,0 +1,60 @@
+{
+  "physicalSlotBytes": 3145728,
+  "officialUploadMaxBytes": 3040870,
+  "builds": [
+    {
+      "variant": "baseline",
+      "name": "最小官方兼容骨架",
+      "bytes": 965136,
+      "mib": 0.9204254150390625,
+      "slotPercent": 30.68084716796875,
+      "physicalFree": 2180592,
+      "uploadFree": 2075734,
+      "sha256": "1651fccc5192ce7764c4e288a7e343b3555a154a55b1eddda5b9afd6e389b752"
+    },
+    {
+      "variant": "single",
+      "name": "公共功能 + 01",
+      "bytes": 1866560,
+      "mib": 1.78009033203125,
+      "slotPercent": 59.336344401041664,
+      "physicalFree": 1279168,
+      "uploadFree": 1174310,
+      "sha256": "d0bacbcb6d6e190da0555551a681ef60545d7e90cbe295d9a9fce1887daf6de4"
+    },
+    {
+      "variant": "batch",
+      "name": "第一批 01–06",
+      "bytes": 1949920,
+      "mib": 1.859588623046875,
+      "slotPercent": 61.986287434895836,
+      "physicalFree": 1195808,
+      "uploadFree": 1090950,
+      "sha256": "78f0f798d7e2a06c6579e07eda4643fa8a32d1558d8283504ef5cfe631f4c915"
+    },
+    {
+      "variant": "batch2",
+      "name": "第二批累计 01–12",
+      "version": "0.2.0",
+      "bytes": 2066720,
+      "mib": 1.970977783203125,
+      "slotPercent": 65.69925944010416,
+      "physicalFree": 1079008,
+      "uploadFree": 974150,
+      "deltaFromBatch01": 116800,
+      "sha256": "4f84401949438a66181ba8367af3cbe87bc14bb208bc4182d5f6a3e46dc35824"
+    },
+    {
+      "variant": "batch3",
+      "name": "第三批累计 01–18",
+      "version": "0.3.0",
+      "bytes": 2240496,
+      "mib": 2.1367034912109375,
+      "slotPercent": 71.22344970703125,
+      "physicalFree": 905232,
+      "uploadFree": 800374,
+      "deltaFromBatch02": 173776,
+      "sha256": "d4080c14afeee4c1a5a6a846dcc0bac7db5ef5a18c22b2685ca3077de71ca485"
+    }
+  ]
+}

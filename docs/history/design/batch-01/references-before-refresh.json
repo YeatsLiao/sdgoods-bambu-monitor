@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "updated": "2026-11-05",
+  "normativeSpec": "SPEC.md",
+  "firmwareAcceptance": "not-accepted",
+  "imageRevision": "new-request-interrupted-no-output",
+  "pages": [
+    {
+      "page": 1,
+      "role": "overview",
+      "file": "page-1-overview.png",
+      "sha256": "09f7be1a24f1a0a048331a4981df58b6d328d14a608b77124271b219d1dcc1f7",
+      "sourceOriginal": "../../assets/generated-originals/exec-f6fc4c09-0921-46fd-9eb7-1190427ea7d6.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "型号为必需动态文字层，示意 P1S 不可烘焙成实际型号"
+    },
+    {
+      "page": 2,
+      "role": "ams",
+      "file": "page-2-ams.png",
+      "sha256": "d12d90f2ad5caaea572e9929a32b8909eb685fc704d1113a6ed0299a3803e608",
+      "sourceOriginal": "../../assets/generated-originals/exec-215d53d9-6bd4-4675-b454-2b24f5e75f7b.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "旧图含外置摘要，按 SPEC 删除；可爱猫必须保留；新版生成中断"
+    },
+    {
+      "page": 3,
+      "role": "external-ht",
+      "file": "page-3-external-ht.png",
+      "sha256": "2d0eff85682f6aa241e9f1ba096904e3355e161678949247cf0f7054df152bdf",
+      "sourceOriginal": "../../assets/generated-originals/exec-2025fdb4-40ea-4732-81bc-0073679c7322.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "外置上区 + HT 主区；缺失值按 --，只监控"
+    },
+    {
+      "page": 4,
+      "role": "details",
+      "file": "page-4-details.png",
+      "sha256": "fd1fbea68cb5fa506c40363b26641c4ac782714d06712d5b329f898f8126f1dc",
+      "sourceOriginal": "../../assets/generated-originals/exec-8383f46d-a00e-4f21-bbc8-d864e37f3af8.png",
+      "status": "reference-with-explicit-spec-overrides",
+      "note": "图内旧第三页标题/三页点需要修订；逻辑第四页以 SPEC 为准"
+    }
+  ],
+  "styles": [
+    {
+      "id": 1,
+      "name": "大字进度"
+    },
+    {
+      "id": 2,
+      "name": "点阵终端"
+    },
+    {
+      "id": 3,
+      "name": "像素工坊"
+    },
+    {
+      "id": 4,
+      "name": "猫咪监工"
+    },
+    {
+      "id": 5,
+      "name": "夜班打印室"
+    },
+    {
+      "id": 6,
+      "name": "彩色料仓"
+    }
+  ],
+  "requiredCatAssets": [
+    {
+      "role": "overview-printer-with-model-anchor",
+      "status": "needs-reference-matching"
+    },
+    {
+      "role": "cute-peeking-cat-ams",
+      "status": "missing-approved-runtime-asset"
+    },
+    {
+      "role": "cute-cat-external-ht",
+      "status": "missing-approved-runtime-asset"
+    },
+    {
+      "role": "cute-cat-details",
+      "status": "block-cat-rejected"
+    }
+  ]
+}
