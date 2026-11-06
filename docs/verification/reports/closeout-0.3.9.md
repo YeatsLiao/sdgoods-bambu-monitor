@@ -12,11 +12,11 @@
 
 ## 当前入口
 
-- [架构](../architecture/README.md)：模块责任、线程、数据流程、官方边界和维护顺序。
-- [设计](../design/README.md)：18款稳定编号、三批规范、设置与原型状态。
-- [素材追溯](../assets/CATALOG.md)：每款皮肤到原始图、运行资源及转换脚本。
-- [当前验收](CURRENT-STATUS.md)：软件检查、用户整体反馈与0.3.9手势待验分开记录。
-- [冻结固件](../../dist/releases/v0.3.9/release.json)：纯应用包、完整镜像和各文件校验值。
+- [架构](../../architecture/README.md)：模块责任、线程、数据流程、官方边界和维护顺序。
+- [设计](../../design/README.md)：18款稳定编号、三批规范、设置与原型状态。
+- [素材追溯](../../assets/CATALOG.md)：每款皮肤到原始图、运行资源及转换脚本。
+- [当前验收](../CURRENT-STATUS.md)：软件检查、用户整体反馈与0.3.9手势待验分开记录。
+- [冻结固件](../../history/releases/firmware/releases/v0.3.9/release.json)：纯应用包、完整镜像和各文件校验值。
 
 catalog.json记录24张原图的原名/尺寸/SHA/历史说明关联、18款皮肤、21份运行编码、源图和编码器、字体来源，以及相同哈希的重复副本。未记录的精确提示词不作补写；当前未用的旧资源继续保存。原始生成缓存24张已逐字节核对，旧迁移清单1,721条媒体资源全部保留。
 
@@ -27,15 +27,15 @@ catalog.json记录24张原图的原名/尺寸/SHA/历史说明关联、18款皮�
 ## 复现检查
 
 ```powershell
-python tools/archive_images.py --source docs/assets/generated-originals
-python tools/catalog_assets.py
-python tools/check_docs.py
-python tools/catalog_assets.py --check
-python tools/check_platform.py
-python tools/backup_project.py --label v0.3.9-closeout
+python tools/assets/archive_images.py --source docs/assets/generated-originals
+python tools/assets/catalog_assets.py
+python tools/checks/check_docs.py
+python tools/assets/catalog_assets.py --check
+python tools/checks/check_platform.py
+python tools/maintenance/backup_project.py --label v0.3.9-closeout
 ```
 
-单独验证ZIP：python tools/backup_project.py --verify backups/实际文件名.zip。标准编译/合并/COM6烧录仍见根README，只有一个build目录。
+单独验证ZIP：python tools/maintenance/backup_project.py --verify backups/实际文件名.zip。标准编译/合并/COM6烧录仍见根README，只有一个build目录。
 
 ## 验收边界
 

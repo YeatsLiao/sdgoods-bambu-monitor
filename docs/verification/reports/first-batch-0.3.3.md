@@ -1,6 +1,6 @@
 # 第一批四页与设置：0.3.3 软件检查
 
-当前设计基准见 [四页规范](../design/batch-01/SPEC.md)。本报告来源是本机编译、生产 LVGL 渲染和解析测试，不是设备截图。
+当前设计基准见 [四页规范](../../design/batch-01/SPEC.md)。本报告来源是本机编译、生产 LVGL 渲染和解析测试，不是设备截图。
 
 ## 行为与结构
 
@@ -12,19 +12,19 @@ printer_model 单独存入线程安全状态快照，仅接收可信 printer_typ
 
 按 LVGL 字形实际 advance 选字号，禁止隐式换行；最终绘制限制在本行矩形内。文字再按整个行高对应的最窄圆弦保留 6px 径向余量。长时间转换为分钟、小时或天/小时/分钟；未知为 --。英文紧凑温度行使用 Noz，完整设置和详情仍保留清楚字段名。
 
-已检查中文/英文、H2D Pro、100%、1,000,000 层、1,000,000 分钟、100,000 分钟 HT 倒计时、未知温湿度/余量、外置占位零、仅外置和第二台 HT。六款中文四页见 [24 页总览](preview/batch-01-zh.png)；对应英文见 [英文总览](preview/batch-01-en.png)。
+已检查中文/英文、H2D Pro、100%、1,000,000 层、1,000,000 分钟、100,000 分钟 HT 倒计时、未知温湿度/余量、外置占位零、仅外置和第二台 HT。六款中文四页见 [24 页总览](../preview/batch-01-zh.png)；对应英文见 [英文总览](../preview/batch-01-en.png)。
 
 修正了实测发现的猫咪帽子与活动槽标签相挤、详情齿轮因圆弦限宽变成缺字、风扇行末尾截断和英文 Nozzle 超出紧凑标签宽度。现有软件图仍须与新真机照片逐页比较。
 
 ## 执行的检查
 
-- tools/test_reports.py：真实 C 解析器、型号来源、非遥测身份、增量更新、AMS/HT、移除、余量未知、多盒分组与序号断言通过。
-- tools/render_preview.py：18 款 × 四页 × 两种语言，共 144 个基准页；第一批额外边界场景及完整设置/选肤交互断言通过。
-- tools/preview_png.cjs：从真实 framebuffer 导出圆形 PNG 和总览，未使用原型整图伪装运行效果。
+- tools/checks/test_reports.py：真实 C 解析器、型号来源、非遥测身份、增量更新、AMS/HT、移除、余量未知、多盒分组与序号断言通过。
+- tools/preview/render_preview.py：18 款 × 四页 × 两种语言，共 144 个基准页；第一批额外边界场景及完整设置/选肤交互断言通过。
+- tools/preview/preview_png.cjs：从真实 framebuffer 导出圆形 PNG 和总览，未使用原型整图伪装运行效果。
 - 标准 idf.py build / merge-bin：构建通过，完整镜像各部分匹配。
-- tools/pack_app.py：ESP32-S3、BambuMonitor、版本 0.3.3、纯应用镜像和官方容量限制通过。
-- tools/check_platform.py：82 个官方文件与 radio 原样一致。
-- tools/archive_images.py / tools/check_docs.py：全部原图、当前资源和原有迁移记录的字节保留，链接与 SHA 检查见最终运行结果。
+- tools/firmware/pack_app.py：ESP32-S3、BambuMonitor、版本 0.3.3、纯应用镜像和官方容量限制通过。
+- tools/checks/check_platform.py：82 个官方文件与 radio 原样一致。
+- tools/assets/archive_images.py / tools/checks/check_docs.py：全部原图、当前资源和原有迁移记录的字节保留，链接与 SHA 检查见最终运行结果。
 
 ## 包体与限制
 

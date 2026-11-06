@@ -1,6 +1,6 @@
 # 真机小细节修复 0.3.8
 
-基于 [用户真机反馈](device/feedback-20261106-polish/README.md)，沿用已满意的18套布局，修整局部绘制。
+基于 [用户真机反馈](../device/feedback-20261106-polish/README.md)，沿用已满意的18套布局，修整局部绘制。
 
 ## 变化
 
@@ -8,7 +8,7 @@
 - 第二组未知余量用进度轨道中央的三段短虚线替换贴顶长线；第三组也统一居中，去掉原先上下双排的突兀边框。未知 `--` 与已知 `0%` 空轨道仍严格区分。
 - 第二组槽号根据耗材色亮度选择深浅文字，白色、黄色底能读出槽号。
 - 第一组带图标的详情和第三组详情共用24px图标：喷嘴加热块及锥尖、热床蒸汽及平台、腔体内温度计、速度表盘；统一2px视觉线宽与卡内位置，保留各款强调色。第二组原型无详情图标的卡片继续沿用原排版。
-- 型号名称与官方代码补全，大小写、空格、连字符和下划线统一后精确匹配，避免 A1 mini 被识别成 A1、H2D Pro 被识别成 H2D。型号来源和边界见 [MQTT 规则](../architecture/mqtt-identity.md)。
+- 型号名称与官方代码补全，大小写、空格、连字符和下划线统一后精确匹配，避免 A1 mini 被识别成 A1、H2D Pro 被识别成 H2D。型号来源和边界见 [MQTT 规则](../../architecture/mqtt-identity.md)。
 
 ## 软件验证
 
@@ -20,9 +20,9 @@
 
 运行预览使用真实 LVGL 绘制代码和测试数据；重点回放：
 
-- [竹林未知余量](preview/feedback-bamboo-unknown.png)
-- [竹林已知空料](preview/feedback-bamboo-empty.png)
-- [农场完成详情](preview/feedback-farm-details.png)
+- [竹林未知余量](../preview/feedback-bamboo-unknown.png)
+- [竹林已知空料](../preview/feedback-bamboo-empty.png)
+- [农场完成详情](../preview/feedback-farm-details.png)
 
 本轮不烧录设备，实际显示效果由用户烧录后确认。
 

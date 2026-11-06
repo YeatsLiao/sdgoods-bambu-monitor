@@ -9,4 +9,4 @@
 5. 改图后同步素材归档与追溯清单；改文字后检查字形；改交互后运行原生LVGL回归。
 6. 标准build/merge-bin、官方包容量和完整镜像验证通过后交付，按版本记录校验值。
 
-本轮收尾检查与备份见 [收尾记录](../verification/closeout-0.3.9.md)。当前版本状态只从 [CURRENT-STATUS](../verification/CURRENT-STATUS.md) 获取。
+本轮收尾检查与备份见 [收尾记录](../verification/reports/closeout-0.3.9.md)。当前版本状态只从 [CURRENT-STATUS](../verification/CURRENT-STATUS.md) 获取。

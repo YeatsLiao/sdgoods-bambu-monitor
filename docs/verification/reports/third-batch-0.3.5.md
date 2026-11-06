@@ -1,6 +1,6 @@
 # 第三组13–18最初原型还原候选：0.3.5
 
-本轮按 [第三批最初原图](../design/batch-03/README.md) 重做六款。原图不覆盖，约束见 [SPEC](../design/batch-03/SPEC.md)。三批现在均有对应的原图还原候选，尚未通过本轮真机视觉验收。
+本轮按 [第三批最初原图](../../design/batch-03/README.md) 重做六款。原图不覆盖，约束见 [SPEC](../../design/batch-03/SPEC.md)。三批现在均有对应的原图还原候选，尚未通过本轮真机视觉验收。
 
 ## 六款与四组页面
 
@@ -26,8 +26,8 @@
 - 第一/二组96张中英文四页PNG与0.3.4冻结版本逐字节一致。
 - ESP-IDF标准build/merge-bin、合并组成检查、纯应用包校验通过；82个官方文件与radio逐字节一致。
 
-首轮发现喷嘴标签、外置/HT标题碰到角色、详情状态牌遮挡角色边缘、100%辅助风扇末尾截断；已调整并重新渲染。最大值示例见 [风扇100%](preview/stress-16-page-4-zh.png)。
+首轮发现喷嘴标签、外置/HT标题碰到角色、详情状态牌遮挡角色边缘、100%辅助风扇末尾截断；已调整并重新渲染。最大值示例见 [风扇100%](../preview/stress-16-page-4-zh.png)。
 
-[第三组中文24页](preview/batch-03-zh.png) · [英文24页](preview/batch-03-en.png) · [素材与完整提示词](../history/design/batch-03/runtime-assets-20261105.md)
+[第三组中文24页](../preview/batch-03-zh.png) · [英文24页](../preview/batch-03-en.png) · [素材与完整提示词](../../history/design/batch-03/runtime-assets-20261105.md)
 
 本轮未烧录COM6，未测真实面板显示、MQTT本机回复、刷新耗时/峰值内存。图片解压缓存上限是代码约束，不代表已经取得硬件内存测量。真实截图和操作验收仍需进行。

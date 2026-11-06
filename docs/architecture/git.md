@@ -21,10 +21,12 @@
 - tools/fonts中的TTF工作副本：其归档源在docs/assets/fonts/source提交。
 - docs/verification/preview、docs/history/releases：大量程序生成的当前预览和历史渲染帧。
 
-不提交不等于删除。所有历史渲染帧与当前预览已存入完整ZIP；Git用于维护源码和核心素材，完整ZIP另负责保存本机全部媒体和交付物。只克隆Git不会取得被忽略的旧渲染帧，完整媒体恢复应使用私有备份。tools/check_docs.py的全量媒体检查需要完整归档数据。
+不提交不等于删除。所有历史渲染帧与当前预览已存入完整ZIP；Git用于维护源码和核心素材，完整ZIP另负责保存本机全部媒体和交付物。只克隆Git不会取得被忽略的旧渲染帧，完整媒体恢复应使用私有备份。tools/checks/check_docs.py的全量媒体检查需要完整归档数据。
 
 ## 本轮状态
 
 .gitignore已按以上范围分组并验证；核心原图、真机截图、历史原型及提示词均不会被忽略。目前只修改了规则和说明，尚未执行git add、commit或push。Git不会自动收录尚未暂存的新素材，提交时需要把以上“应提交”范围内的新增文件一并加入。
 
-提交前查看 git status --short。不要把私有备份或本机凭据强制加入Git。完整保存及恢复方法见 [收尾记录](verification/closeout-0.3.9.md)。
+提交前查看 git status --short。不要把私有备份或本机凭据强制加入Git。完整保存及恢复方法见 [收尾记录](../verification/reports/closeout-0.3.9.md)。
+
+工具已按tools/README.md分类；版本报告集中在docs/verification/reports。旧dist交付物移到docs/history/releases/firmware，仍由完整备份保存，不进入Git。build和dist是可再生输出目录，后续构建/打包会重建。

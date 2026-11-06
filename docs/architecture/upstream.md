@@ -1,7 +1,7 @@
 # 来源与再分发说明
 
 - 官方板级支持、启动器、平台文件和 jpegenc：取自本机 `D:/2.Project/SDGOODS/sdgoods-radio`。保留原作者声明、Required Notice、LICENSE、LICENSING.md、NOTICE、TRADEMARK.md，遵守各文件原许可。
-- 官方层内容校验清单：`docs/verification/platform-snapshot.json`，由 `tools/check_platform.py` 对本机参考工程逐文件 SHA-256 比较生成。
+- 官方层内容校验清单：`docs/verification/platform-snapshot.json`，由 `tools/checks/check_platform.py` 对本机参考工程逐文件 SHA-256 比较生成。
 - LVGL：8.3 系列本地离线依赖，来源为电台项目已安装的 `managed_components/lvgl__lvgl`，MIT 许可及原版权文件保留。已有平台补丁由 `main/patches` 幂等校验与应用。
 - 拓竹协议、状态、配网、试运行与测试：取自本机 `D:/2.Project/ai-passport-bambu-monitor`，该项目 README 标明 MIT；本工程新增 SPDX 注释不删除原来源说明。适配改动集中在 `main/bambu`，不修改原工程。
 - 字体：Noto Sans SC，SIL OFL 1.1。应用字体单独生成在 `main/fonts`，不覆盖官方字体。完整 OFL 见 `components/sdgoods_board/fonts/OFL.txt`。字体源与转换说明见 `tools/fonts/README.md`。

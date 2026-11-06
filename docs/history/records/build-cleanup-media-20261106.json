@@ -1,0 +1,455 @@
+{
+  "policy": "Preserve every build media/font/bin/log by hash before deleting rebuildable cache",
+  "files": [
+    {
+      "from": "build/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/BambuMonitor-cffaa757221e.bin",
+      "sha256": "cffaa757221e65822fe3689fc21f891066c841d59299988a89586b84c6fc6f37"
+    },
+    {
+      "from": "build/merged-binary.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/merged-binary-1373a7c288fe.bin",
+      "sha256": "1373a7c288fe16383adfcc2d23dc6daac71ffca7dfbccb10a54bb80e3a57fb12"
+    },
+    {
+      "from": "build/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/sdgoods-bambu-monitor-full.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/merged-binary-1373a7c288fe.bin",
+      "sha256": "1373a7c288fe16383adfcc2d23dc6daac71ffca7dfbccb10a54bb80e3a57fb12"
+    },
+    {
+      "from": "build/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-22a6b5c517d9.bin",
+      "sha256": "22a6b5c517d9582a7f1c241810589547d34f291a48e6608fafddbc67ebc2df89"
+    },
+    {
+      "from": "build/log/archive-polish-0.3.8.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/archive-polish-0.3.8-37483fff6f6d.log",
+      "sha256": "37483fff6f6d2c4abeceac4297ed6524343c575e6fd88782067c15cd33aed7d0"
+    },
+    {
+      "from": "build/log/archive-settings-0.3.9.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/archive-settings-0.3.9-524c84e471de.log",
+      "sha256": "524c84e471de5b843f390c273df553dfda5b99534623d424832ef08751a7f3c6"
+    },
+    {
+      "from": "build/log/backup-before-closeout.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/backup-before-closeout-31b91b45f43e.log",
+      "sha256": "31b91b45f43eb00f93f7719decc954ca0bf28694628fb0350ccb9a50c4d7b70e"
+    },
+    {
+      "from": "build/log/backup-closeout.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/backup-closeout-d9ac2657575a.log",
+      "sha256": "d9ac2657575a5ef1f64c361788f9c176939a91faf0e3e2331c8f733c21e5da74"
+    },
+    {
+      "from": "build/log/build-closeout-0.3.9.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-closeout-0.3.9-0bf6ab2d74af.log",
+      "sha256": "0bf6ab2d74af00748ab50ad004a5fab88f94d93645e6b72852ba32eb37648788"
+    },
+    {
+      "from": "build/log/build-model-0.3.7.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-model-0.3.7-6a55c4e52c19.log",
+      "sha256": "6a55c4e52c199df680d0632ecee0a31c2d02c662adcd58740aa9d7ef675758a9"
+    },
+    {
+      "from": "build/log/build-polish-0.3.8.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-polish-0.3.8-92cb9a67f7c0.log",
+      "sha256": "92cb9a67f7c0500374aa461bf4565859dee8faa030f853c783b1f39f79d4b5de"
+    },
+    {
+      "from": "build/log/build-settings-0.3.9.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-settings-0.3.9-041e9efdeaad.log",
+      "sha256": "041e9efdeaade234f846ff6a92e64d011a929e1c20a6beb07e6349bf0ccc96c9"
+    },
+    {
+      "from": "build/log/build-ui-0.3.3.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-ui-0.3.3-649c1d257705.log",
+      "sha256": "649c1d2577051d996045db7026a1db85479e33e79c0d18d0c73033d235b7332c"
+    },
+    {
+      "from": "build/log/build-ui-0.3.4.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-ui-0.3.4-85ed92e343da.log",
+      "sha256": "85ed92e343da92dd1680f8d8c53fa228f3c6086d259dcefda20794895ecad5d4"
+    },
+    {
+      "from": "build/log/build-ui-0.3.5.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-ui-0.3.5-b185e9d949ee.log",
+      "sha256": "b185e9d949ee184e229b1a1272db4a3fa8c44123f5917629785c1ea2ceeb5386"
+    },
+    {
+      "from": "build/log/build-ui-0.3.6.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-ui-0.3.6-ddbe2384d6cc.log",
+      "sha256": "ddbe2384d6ccaaf6933c7957deb574b2affcd60cb8544d808f3ceed31b880964"
+    },
+    {
+      "from": "build/log/docs-polish-0.3.8.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/docs-polish-0.3.8-527be64243cd.log",
+      "sha256": "527be64243cdd4f761a48cae832be517ebbe64e455b592e2fad129d9fff86bb8"
+    },
+    {
+      "from": "build/log/docs-settings-0.3.9.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/docs-settings-0.3.9-5c8aa4aaa88e.log",
+      "sha256": "5c8aa4aaa88e1d20b1357e1bf6a8601a816cb858137d1beb1b521c7f9d353004"
+    },
+    {
+      "from": "build/log/preview-0.3.8.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-0.3.8-9a2475ca19b1.log",
+      "sha256": "9a2475ca19b1164acc36c64754f1e8b3c9d890a4f3ac64b2ccd4346ac3f494a3"
+    },
+    {
+      "from": "build/log/preview-0.3.9.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-0.3.9-355fe90667e9.log",
+      "sha256": "355fe90667e9ec67c8721b96db9790985aead21b5d26f1ce3c0f6611aa0a0eb2"
+    },
+    {
+      "from": "build/log/preview-ui-0.3.3.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-ui-0.3.3-e1e1a3ccba67.log",
+      "sha256": "e1e1a3ccba6748494aaf9b5808570e9a8213de36cfd86ec09a0e19750bb4172c"
+    },
+    {
+      "from": "build/log/preview-ui-0.3.4.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-ui-0.3.3-e1e1a3ccba67.log",
+      "sha256": "e1e1a3ccba6748494aaf9b5808570e9a8213de36cfd86ec09a0e19750bb4172c"
+    },
+    {
+      "from": "build/log/preview-ui-0.3.5.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-ui-0.3.5-5142fe4fae3c.log",
+      "sha256": "5142fe4fae3c06406eb1a92bf09265e30ecdd65337d34baa9ba5f62b1ec9469c"
+    },
+    {
+      "from": "build/log/preview-ui-0.3.6.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-ui-0.3.6-599b49183ee6.log",
+      "sha256": "599b49183ee61f45527fd8f2b7d0b8058282a94bc198b76d2c1a423b86c086da"
+    },
+    {
+      "from": "build/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-baseline/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/BambuMonitor-1651fccc5192.bin",
+      "sha256": "1651fccc5192ce7764c4e288a7e343b3555a154a55b1eddda5b9afd6e389b752"
+    },
+    {
+      "from": "build/history/build-baseline/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/history/build-batch/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/BambuMonitor_batch01_app.bin",
+      "sha256": "78f0f798d7e2a06c6579e07eda4643fa8a32d1558d8283504ef5cfe631f4c915"
+    },
+    {
+      "from": "build/history/build-batch/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/history/build-batch2/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/BambuMonitor_batch02_app.bin",
+      "sha256": "4f84401949438a66181ba8367af3cbe87bc14bb208bc4182d5f6a3e46dc35824"
+    },
+    {
+      "from": "build/history/build-batch2/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/history/build-batch3/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/BambuMonitor-4e59951ecd1c.bin",
+      "sha256": "4e59951ecd1ce92d2aa136f03cc76356fabcc6db7a397b8e0983e6e1b9a33a52"
+    },
+    {
+      "from": "build/history/build-batch3/merged-binary.bin",
+      "preservedAt": "docs/history/releases/firmware/sdgoods-bambu-monitor-full.bin",
+      "sha256": "e3aa3f0c94db38921ab020aea00623397833e060c98f6ef8546e2bc1ed7144d9"
+    },
+    {
+      "from": "build/history/build-batch3/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/history/build-single/BambuMonitor.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/BambuMonitor-d0bacbcb6d6e.bin",
+      "sha256": "d0bacbcb6d6e190da0555551a681ef60545d7e90cbe295d9a9fce1887daf6de4"
+    },
+    {
+      "from": "build/history/build-single/ota_data_initial.bin",
+      "preservedAt": "docs/history/releases/firmware/otadata-initial.bin",
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "from": "build/history/logs/build-baseline-final.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-baseline-final-91316c6601d3.log",
+      "sha256": "91316c6601d3cf33b557b30b2d5388d5928a1e3d8cc9b3219a61fe9adef00c47"
+    },
+    {
+      "from": "build/history/logs/build-baseline.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-baseline-e3b0c44298fc.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "from": "build/history/logs/build-batch-final.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-batch-final-40b869dfa9ed.log",
+      "sha256": "40b869dfa9edc0c04f576a8e8c9850e8af177f19d016ea3d8d7d1d821faff244"
+    },
+    {
+      "from": "build/history/logs/build-batch.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-batch-17c8e006cb82.log",
+      "sha256": "17c8e006cb82c479e9e50d0afe0ffcaa3b73737edd000fdf1fec98bfaaa5452b"
+    },
+    {
+      "from": "build/history/logs/build-batch2-final.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-batch2-final-df26ec7e87c9.log",
+      "sha256": "df26ec7e87c978d3d2267bd2ae3af5dc20daaa9be7f5d75a40619723e97849ae"
+    },
+    {
+      "from": "build/history/logs/build-batch2.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-batch2-bd930a1d20d0.log",
+      "sha256": "bd930a1d20d049bc4f88735f238de5212667ec4d0725b471d317d5fa8a38fd06"
+    },
+    {
+      "from": "build/history/logs/build-batch3.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-batch3-dc20540c778d.log",
+      "sha256": "dc20540c778d967313e9131d974d7c5b61829a351af9245aa694cbead436a607"
+    },
+    {
+      "from": "build/history/logs/build-design-repair.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-design-repair-fbf390151dd9.log",
+      "sha256": "fbf390151dd9643cf3e7c222a8e202675e80d66948d8c40c44433c5fa3a57546"
+    },
+    {
+      "from": "build/history/logs/build-full.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-full-98774bdda323.log",
+      "sha256": "98774bdda32322671454e7eb80a1a4350a31be0ea01d4178d0926ed04b36e964"
+    },
+    {
+      "from": "build/history/logs/build-picker.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-picker-ab63c50c525f.log",
+      "sha256": "ab63c50c525ff83cf097e431d647f5ac83e778495c3c511da852b4f2ab60de00"
+    },
+    {
+      "from": "build/history/logs/build-preview.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-preview-41ff69faee2a.log",
+      "sha256": "41ff69faee2ad5ead8f65a3c0308f4588d1404929f769bd78bffaca1252cffa3"
+    },
+    {
+      "from": "build/history/logs/build-single-final.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-single-final-48e8963fbbfe.log",
+      "sha256": "48e8963fbbfebcd9ec065971c906976120fdfd46c473745445946ae35dbb3087"
+    },
+    {
+      "from": "build/history/logs/build-single.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-single-e9bb3d0bfbcb.log",
+      "sha256": "e9bb3d0bfbcb9dc083c28a979915f9884b3899df98dbf39f13424ac35d41203f"
+    },
+    {
+      "from": "build/history/logs/build-standard.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/build-standard-895c825ad813.log",
+      "sha256": "895c825ad81381d87b03028cc0d05f42c767030bc4336808a2169ff015715bfd"
+    },
+    {
+      "from": "build/history/logs/cmake-trace.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/cmake-trace-fbdc5a4a03a9.log",
+      "sha256": "fbdc5a4a03a947138fc8d0c24d055f35d2147b6ccfb98418a53418b46db62db0"
+    },
+    {
+      "from": "build/history/logs/font-design-repair.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/font-design-repair-2091aa4717de.log",
+      "sha256": "2091aa4717dee3534f66147cf8e55a8bc909740148168cf8cedf47d5f66bbc4a"
+    },
+    {
+      "from": "build/history/logs/font-picker.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/font-picker-cecdd533ecba.log",
+      "sha256": "cecdd533ecbada70ef10a077215288815e9ecca24bf46df7113787478eb0c7d4"
+    },
+    {
+      "from": "build/history/logs/preview-design-repair.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-design-repair-45fb8f1c3766.log",
+      "sha256": "45fb8f1c3766583d37f36a44a33a46d93be5e3b4952838a0bb04410df25448da"
+    },
+    {
+      "from": "build/history/logs/preview-picker.log",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/preview-picker-4b67afebe1aa.log",
+      "sha256": "4b67afebe1aa5c77ed40642f11f44a722106aa2370c5059cdfd7af19cccfc28f"
+    },
+    {
+      "from": "build/history/build-single/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-e59ba2e189f6.bin",
+      "sha256": "e59ba2e189f6e7a09c71c75a18f942f7bfcb563704c5f641917e648669559c99"
+    },
+    {
+      "from": "build/history/build-single/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-single/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-single/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-single/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-single/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch3/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-b4450919a0f6.bin",
+      "sha256": "b4450919a0f6ee4febba80a62e5603bf6011d43508e8c5f2dd83e0a5999f8e2b"
+    },
+    {
+      "from": "build/history/build-batch3/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-batch3/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch3/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch3/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch3/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch2/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-f1e63433b755.bin",
+      "sha256": "f1e63433b755062bfaf771f84a25b3dd4d184bbd123ae67670ef85082ccb97f0"
+    },
+    {
+      "from": "build/history/build-batch2/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-batch2/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch2/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch2/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch2/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-e8a639ff5e10.bin",
+      "sha256": "e8a639ff5e10be3e8463371cacb1ba36b2316d18e1c2e4c2deb098d1d9c9680f"
+    },
+    {
+      "from": "build/history/build-batch/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-batch/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-batch/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-batch/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-baseline/bootloader/bootloader.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/bootloader-80ac4fcd4c16.bin",
+      "sha256": "80ac4fcd4c16112d10a444b69d11d6b201e1e7b69560ab92fa642fd9b168866d"
+    },
+    {
+      "from": "build/history/build-baseline/partition_table/partition-table.bin",
+      "preservedAt": "platform/prebuilt/partition-table.bin",
+      "sha256": "0b9b034d9ad6e8aee524e74405a98fc9b414d79712132c807145489048fdc1ff"
+    },
+    {
+      "from": "build/history/build-baseline/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-baseline/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/history/build-baseline/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/history/build-baseline/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    },
+    {
+      "from": "build/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_C-e531e9434d2b.bin",
+      "sha256": "e531e9434d2bbb255e5d5e0be994c4e8314d93e0af71600d41c4ad0213056113"
+    },
+    {
+      "from": "build/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "preservedAt": "docs/history/releases/firmware/recovered-build/CMakeDetermineCompilerABI_CXX-bbb616792021.bin",
+      "sha256": "bbb6167920217487eae7d589c7d807d5a5bc2637662488570ee00d1498fef1cd"
+    }
+  ]
+}
