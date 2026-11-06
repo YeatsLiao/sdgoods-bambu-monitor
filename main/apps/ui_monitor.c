@@ -41,6 +41,7 @@ static int active_skin_id(void){return s_view==VIEW_SKIN_PICKER?s_candidate:moni
 static int wrapped_skin(int id){return (id-1+CONFIG_BAMBU_SKIN_COUNT)%CONFIG_BAMBU_SKIN_COUNT+1;}
 static void open_skin_picker(view_t origin);
 static bool s_asleep,s_dirty=true,s_pressed,s_wake_touch;
+static bool s_gesture_blocked;
 static uint32_t s_last_refresh,s_last_touch;
 static lv_point_t s_down,s_last_point;
 static bambu_print_state_t s_previous_state=BAMBU_STATE_UNKNOWN;
@@ -194,7 +195,7 @@ static void on_tap(void *arg) {
     monitor_preferences_t p=*monitor_preferences_get();
     bool save=false;
     if(s_view==VIEW_MONITOR) {
-        if(s_page==page_count()-1 && pt.y>=52 && pt.y<92 && pt.x>=268 && pt.x<310) {s_view=VIEW_SETTINGS;s_candidate=p.skin;}
+        if(s_page==page_count()-1 && detail_settings_hit(pt)) {s_view=VIEW_SETTINGS;s_candidate=p.skin;}
     } else if(s_view==VIEW_SKIN_PICKER) {
         s_picker_chrome_time=lv_tick_get();
         if(pt.y>=295&&pt.y<342 && pt.x>=82&&pt.x<128) {ui_monitor_back();return;}
@@ -250,7 +251,9 @@ void ui_monitor_poll(void) {
     bool pressed=sdgoods_touch_get_state()==LV_INDEV_STATE_PRESSED;
     if(pressed) sdgoods_touch_get_point(&s_last_point);
     if(pressed&&!s_pressed) {
-        s_down=s_last_point;s_wake_touch=s_asleep;s_tap_suppressed=s_wake_touch;
+        s_down=s_last_point;s_wake_touch=s_asleep;
+        s_gesture_blocked=s_wake_touch||s_service.busy||sdgoods_cc_is_open();
+        s_tap_suppressed=s_gesture_blocked;
         s_press_time=now;s_press_view=s_view;s_drag_candidate=s_candidate;s_hold_fired=false;s_dirty=true;
         if(s_view==VIEW_SKIN_PICKER&&!s_picker_chrome){s_picker_chrome=true;s_picker_chrome_time=now;s_tap_suppressed=true;}
         s_hold_eligible=!s_wake_touch&&!s_service.busy&&!sdgoods_cc_is_open()&&s_view==VIEW_MONITOR&&s_page==0&&
@@ -260,12 +263,16 @@ void ui_monitor_poll(void) {
     if(pressed) {
         s_last_touch=now;
         int dx=s_last_point.x-s_down.x,dy=s_last_point.y-s_down.y;
+        // A drag remains a drag even after reversing or returning to its start.
+        // LVGL can dispatch CLICKED before this poll sees the release.
+        if(abs(dx)>SKIN_TOUCH_SLOP||abs(dy)>SKIN_TOUCH_SLOP)s_tap_suppressed=true;
+        if(sdgoods_cc_is_open()||s_service.busy){s_gesture_blocked=true;s_tap_suppressed=true;}
         if(abs(dx)>SKIN_TOUCH_SLOP||abs(dy)>SKIN_TOUCH_SLOP||sdgoods_cc_is_open()||s_view!=s_press_view||s_service.busy){if(s_hold_eligible)s_dirty=true;s_hold_eligible=false;}
         if(s_hold_eligible&&now-s_press_time>=SKIN_HOLD_MS){
             open_skin_picker(VIEW_MONITOR);s_hold_fired=true;s_hold_eligible=false;s_tap_suppressed=true;
             s_press_view=VIEW_SKIN_PICKER;s_drag_candidate=s_candidate;s_down=s_last_point;
         }else if(s_hold_eligible&&now-s_press_time>=180)s_dirty=true;
-        if(!s_wake_touch&&!sdgoods_cc_is_open()&&s_press_view==VIEW_SKIN_PICKER&&s_view==VIEW_SKIN_PICKER&&s_down.y>=80&&s_down.y<295){
+        if(!s_gesture_blocked&&!s_wake_touch&&!sdgoods_cc_is_open()&&s_press_view==VIEW_SKIN_PICKER&&s_view==VIEW_SKIN_PICKER&&s_down.y>=80&&s_down.y<295){
             int step=abs(dx)>abs(dy)*2?(dx<=-48?1:dx>=48?-1:0):0;
             if(step)s_tap_suppressed=true;
             int candidate=wrapped_skin(s_drag_candidate+step);
@@ -274,9 +281,14 @@ void ui_monitor_poll(void) {
     }
     if(!pressed&&s_pressed) {
         int dx=s_last_point.x-s_down.x,dy=s_last_point.y-s_down.y;
-        if(!s_wake_touch&&!s_hold_fired&&!sdgoods_cc_is_open()&&s_press_view==VIEW_MONITOR&&s_view==VIEW_MONITOR&&
+        if(!s_gesture_blocked&&!s_wake_touch&&!s_hold_fired&&!sdgoods_cc_is_open()&&s_press_view==VIEW_MONITOR&&s_view==VIEW_MONITOR&&
             s_down.y>80&&s_down.y<270&&abs(dx)>45&&abs(dx)>abs(dy)*2){
             s_page=(s_page+(dx<0?1:page_count()-1))%page_count();s_tap_suppressed=true;s_dirty=true;
+        }
+        if(!s_gesture_blocked&&!s_wake_touch&&!s_hold_fired&&!sdgoods_cc_is_open()&&!s_service.busy&&
+            s_press_view>=VIEW_SETTINGS&&s_press_view<=VIEW_NETWORK&&s_view==s_press_view&&
+            s_down.y>80&&s_down.y<315&&dx>48&&dx>abs(dy)*2){
+            s_tap_suppressed=true;ui_monitor_back();s_dirty=true;
         }
         if(s_view==VIEW_SKIN_PICKER&&s_press_view==VIEW_SKIN_PICKER){s_picker_chrome=true;s_picker_chrome_time=now;}
         s_hold_eligible=false;s_dirty=true;

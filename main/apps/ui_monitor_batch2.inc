@@ -32,11 +32,35 @@ static void b2_stamp(lv_draw_ctx_t *ctx,int x,int y){
     center(ctx,x+2,y+1,23,"拓",&bambu_bold_18,0xE45D45);center(ctx,x+2,y+20,23,"竹",&bambu_bold_18,0xE45D45);
 }
 /* Fit the visible decoration into a reserved box; images keep their aspect. */
+static void b2_bamboo(lv_draw_ctx_t *ctx,int x,int y,int w,int h){
+    // Muted, broad leaves and gently leaning canes echo the original theme.
+    int size=LV_MIN(w,h*56/48),height=size*48/56;x+=(w-size)/2;y+=(h-height)/2;
+    const int canes[][4]={{17,44,25,10},{30,44,35,6},{39,43,43,20}};
+    for(int i=0;i<3;i++){
+        int a=x+canes[i][0]*size/56,b=y+canes[i][1]*size/56;
+        int c=x+canes[i][2]*size/56,d=y+canes[i][3]*size/56;
+        stroke(ctx,a,b,c,d,0x547D3F,5);stroke(ctx,a,b,c,d,0x85A957,3);
+        for(int j=1;j<3;j++){
+            int nx=a+(c-a)*j/3,ny=b+(d-b)*j/3;
+            stroke(ctx,nx-2,ny,nx+2,ny+1,0x426A37,1);
+        }
+    }
+    static const int8_t leaves[][8]={
+        {25,17,15,11,3,13,14,18},{25,13,19,5,10,2,15,11},
+        {34,12,40,4,50,2,44,10},{35,18,44,13,55,17,44,20},
+        {41,25,48,22,55,28,48,28},{21,26,12,22,5,27,13,28}};
+    for(unsigned i=0;i<sizeof(leaves)/sizeof(*leaves);i++){
+        lv_point_t p[4];for(int j=0;j<4;j++)p[j]=(lv_point_t){x+leaves[i][2*j]*size/56,y+leaves[i][2*j+1]*size/56};
+        lv_draw_rect_dsc_t d;lv_draw_rect_dsc_init(&d);d.bg_color=lv_color_hex(i%2?0x6E9544:0x507C3B);
+        lv_draw_polygon(ctx,&d,p,4);
+    }
+}
 static void b2_badge_box(lv_draw_ctx_t *ctx,int x,int y,int w,int h){
     int id=design_id();const lv_img_dsc_t *img=NULL;
     if(id==7){b2_boat(ctx,x+(w-39)/2,y+(h-31)/2,1);return;}
-    LV_IMG_DECLARE(bambu_art_handheld);LV_IMG_DECLARE(bambu_robot_head);LV_IMG_DECLARE(bambu_bamboo_leaf);LV_IMG_DECLARE(bambu_astronaut_head);
-    if(id==8)img=&bambu_art_handheld;else if(id==9)img=&bambu_robot_head;else if(id==10)img=&bambu_bamboo_leaf;else if(id==11)img=&bambu_astronaut_head;
+    if(id==10){b2_bamboo(ctx,x,y,w,h);return;}
+    LV_IMG_DECLARE(bambu_art_handheld);LV_IMG_DECLARE(bambu_robot_head);LV_IMG_DECLARE(bambu_astronaut_head);
+    if(id==8)img=&bambu_art_handheld;else if(id==9)img=&bambu_robot_head;else if(id==11)img=&bambu_astronaut_head;
     if(!img)return;
     int width=LV_MIN(w,h*(int)img->header.w/img->header.h),height=width*(int)img->header.h/img->header.w;
     b2_image(ctx,img,x+(w-width)/2,y+(h-height)/2,width);
@@ -122,7 +146,9 @@ static void batch2_materials(lv_draw_ctx_t *ctx){
         const bambu_ams_tray_t *t=&u->slots[i];int y=115+i*37;bool selected=active&&s_data.active_slot_id==i;
         if(selected){rect(ctx,29,y-2,302,34,mixed(s_skin->bg,0xFFFFFF,180),10);frame(ctx,29,y-2,302,34,0xF56A46,10,2);}
         b2_spool(ctx,39,y+3,tray_color(t));
-        snprintf(b,sizeof(b),"%d",i+1);rect(ctx,74,y+3,21,24,tray_color(t),4);center(ctx,74,y+3,21,b,&bambu_bold_18,0xFFFFFF);
+        uint32_t slot_color=tray_color(t);
+        int light=((slot_color>>16)&255)*299+((slot_color>>8)&255)*587+(slot_color&255)*114;
+        snprintf(b,sizeof(b),"%d",i+1);rect(ctx,74,y+3,21,24,slot_color,4);center(ctx,74,y+3,21,b,&bambu_bold_18,light>165000?0x20352A:0xFFFFFF);
         text(ctx,101,y+3,74,t->reported&&t->type[0]?t->type:"--",&bambu_bold_18,s_skin->ink,LV_TEXT_ALIGN_LEFT);
         if(selected){rect(ctx,260,y+6,60,20,0xF56A46,4);center(ctx,262,y+6,56,SDG_T("使用中","In use"),&bambu_font_16,0xFFFFFF);}
         else stroke(ctx,181,y+6,181,y+25,s_skin->ink,1);
@@ -131,7 +157,7 @@ static void batch2_materials(lv_draw_ctx_t *ctx){
         uint32_t color=t->reported?tray_color(t):s_skin->card;
         if(!selected){rect(ctx,265,y+11,52,9,s_skin->card,5);
         if(t->reported&&t->remain>=0){int fill=52*t->remain/100;if(fill>52)fill=52;rect(ctx,265,y+11,fill,9,color,5);}
-        else for(int k=0;k<52;k+=8)stroke(ctx,265+k,y+11,269+k,y+11,s_skin->ink,1);}
+        else unknown_bar(ctx,265,y+11,52,9,mixed(s_skin->ink,s_skin->bg,145));}
     }
     stroke(ctx,52,270,308,270,s_skin->ink,1);materials_footer(ctx,u);
 

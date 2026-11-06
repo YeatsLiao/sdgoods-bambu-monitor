@@ -71,7 +71,7 @@ static void batch3_materials(lv_draw_ctx_t *ctx){
         int bx=179,bw=82;
         if(!selected){
         if(t->reported&&t->remain>=0)b3_bar(ctx,bx,y+11,bw,10,(int)t->remain,tray_color(t));
-        else {for(int k=0;k<bw;k+=8){stroke(ctx,bx+k,y+7,bx+k+3,y+7,s_skin->ink,1);stroke(ctx,bx+k,y+19,bx+k+3,y+19,s_skin->ink,1);} }}
+        else {rect(ctx,bx,y+11,bw,10,s_skin->card,5);unknown_bar(ctx,bx,y+11,bw,10,mixed(s_skin->ink,s_skin->bg,145));} }
         if(t->reported&&t->remain>=0)snprintf(b,sizeof(b),"%.0f%%",(double)t->remain);else strcpy(b,"--");
         center(ctx,267,y+2,56,b,&bambu_bold_22,s_skin->ink);
     }
@@ -79,13 +79,10 @@ static void batch3_materials(lv_draw_ctx_t *ctx){
 
 }
 static void b3_metric_icon(lv_draw_ctx_t *ctx,int x,int y,int n){
-    uint32_t c=b3_accent(n);
-    if(n==0){frame(ctx,x+5,y+5,17,13,c,2,2);stroke(ctx,x+9,y+18,x+14,y+23,c,2);stroke(ctx,x+14,y+23,x+19,y+18,c,2);stroke(ctx,x+13,y,x+13,y+5,c,2);stroke(ctx,x+9,y,x+17,y,c,2);}
-    else if(n==2){frame(ctx,x+1,y+2,25,22,c,2,2);stroke(ctx,x+9,y+6,x+21,y+6,c,2);stroke(ctx,x+9,y+6,x+9,y+11,c,2);}
-    else icon(ctx,n==1?ICON_BED:ICON_SPEED,x,y,c);
+    metric_icon(ctx,x,y,n,b3_accent(n));
 }
 static void batch3_details(lv_draw_ctx_t *ctx){
-    b3_header(ctx);rect(ctx,273,51,27,27,s_skin->bg,14);design_detail_heading(ctx);
+    b3_header(ctx);design_detail_heading(ctx);
     char a[24],b[24];design_detail_status(ctx,66,s_skin->bg,s_skin->ink,true);
     design_layers(ctx,false,s_skin->ink);
     const char *labels[]={SDG_T("喷嘴","Nozzle"),SDG_T("热床","Bed"),SDG_T("腔温","Chamber"),SDG_T("速度","Speed")};char readings[4][64];
@@ -96,7 +93,7 @@ static void batch3_details(lv_draw_ctx_t *ctx){
         int x=DESIGN_GRID_X+(i%2)*DESIGN_GRID_STEP,y=DESIGN_GRID_Y+(i/2)*DESIGN_GRID_ROW;
         rect(ctx,x,y,DESIGN_GRID_W,DESIGN_GRID_H,s_skin->card,9);
         if(design_id()==14||design_id()==18)frame(ctx,x,y,DESIGN_GRID_W,DESIGN_GRID_H,mixed(s_skin->ink,s_skin->bg,85),9,1);
-        b3_metric_icon(ctx,x+8,y+11,i);
+        b3_metric_icon(ctx,x+9,y+12,i);
         text(ctx,x+39,y+1,89,labels[i],&bambu_font_16,s_skin->ink,LV_TEXT_ALIGN_LEFT);
         text(ctx,x+39,y+20,89,readings[i],&bambu_bold_18,s_skin->ink,LV_TEXT_ALIGN_LEFT);
     }

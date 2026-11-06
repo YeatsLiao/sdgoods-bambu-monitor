@@ -46,7 +46,7 @@ static void design_layers(lv_draw_ctx_t *ctx,bool pixel,uint32_t color){
 }
 static void design_detail_heading(lv_draw_ctx_t *ctx){
     center(ctx,126,32,122,SDG_T("打印详情","Print details"),sdg_i18n_is_zh()?&bambu_bold_26:&bambu_bold_22,s_skin->ink);
-    design_gear(ctx,273,52,s_skin->accent);
+    design_gear(ctx,DETAIL_SETTINGS_CX,DETAIL_SETTINGS_CY,s_skin->accent);
 }
 static const char *design_freshness_note(void){
     if(!s_service.connected)return SDG_T("离线","Offline");

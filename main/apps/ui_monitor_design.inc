@@ -36,6 +36,38 @@ static void icon(lv_draw_ctx_t *ctx,icon_t type,int x,int y,uint32_t c){
     else if(type==ICON_ALERT){stroke(ctx,x+13,y+1,x+1,y+24,c,2);stroke(ctx,x+1,y+24,x+25,y+24,c,2);stroke(ctx,x+25,y+24,x+13,y+1,c,2);stroke(ctx,x+13,y+9,x+13,y+15,c,2);rect(ctx,x+12,y+19,3,3,c,2);}
     else {frame(ctx,x+1,y+1,25,24,c,12,2);for(int i=0;i<4;i++)rect(ctx,x+5+(i%2)*9,y+5+(i/2)*8,4,4,c,3);}
 }
+/* Detail telemetry glyphs share a 24px box and a 2px optical weight.
+ * Keep the document/printer symbols used by navigation out of these cards. */
+static void metric_icon(lv_draw_ctx_t *ctx,int x,int y,int metric,uint32_t c){
+    if(metric==0){
+        frame(ctx,x+8,y+1,9,5,c,1,2);
+        frame(ctx,x+4,y+8,17,9,c,2,2);
+        stroke(ctx,x+8,y+18,x+12,y+23,c,2);stroke(ctx,x+12,y+23,x+17,y+18,c,2);
+        stroke(ctx,x+9,y+12,x+16,y+12,c,2);
+    }else if(metric==1){
+        lv_draw_arc_dsc_t d;lv_draw_arc_dsc_init(&d);d.width=2;d.rounded=1;d.color=lv_color_hex(c);
+        for(int i=0;i<2;i++){
+            lv_point_t a={x+7+i*9,y+3},b={x+7+i*9,y+8};
+            lv_draw_arc(ctx,&d,&a,3,270,90);lv_draw_arc(ctx,&d,&b,3,90,270);
+        }
+        frame(ctx,x+2,y+14,21,5,c,2,2);
+        stroke(ctx,x+6,y+22,x+19,y+22,c,2);
+    }else if(metric==2){
+        frame(ctx,x+2,y+2,21,21,c,4,2);
+        frame(ctx,x+11,y+6,4,9,c,2,2);rect(ctx,x+9,y+13,8,7,c,4);
+        stroke(ctx,x+6,y+7,x+7,y+7,c,1);stroke(ctx,x+6,y+11,x+7,y+11,c,1);
+    }else{
+        lv_draw_arc_dsc_t d;lv_draw_arc_dsc_init(&d);d.width=2;d.rounded=1;d.color=lv_color_hex(c);
+        lv_point_t p={x+12,y+15};lv_draw_arc(ctx,&d,&p,10,180,360);
+        stroke(ctx,x+2,y+18,x+22,y+18,c,2);
+        stroke(ctx,x+12,y+15,x+17,y+8,c,2);rect(ctx,x+10,y+13,5,5,c,3);
+    }
+}
+static void unknown_bar(lv_draw_ctx_t *ctx,int x,int y,int w,int h,uint32_t c){
+    // Unknown is not an empty spool: short, evenly inset dashes on the midline.
+    int count=w>=70?5:3,step=10,total=(count-1)*step+4;
+    for(int i=0;i<count;i++)rect(ctx,x+(w-total)/2+i*step,y+(h-2)/2,4,2,c,1);
+}
 static void cat_peek(lv_draw_ctx_t *ctx,int x,int y,int width){
 #if CONFIG_BAMBU_SKIN_COUNT > 1
     LV_IMG_DECLARE(bambu_cat_peek);
@@ -46,8 +78,22 @@ static void cat_peek(lv_draw_ctx_t *ctx,int x,int y,int width){
     (void)ctx;(void)x;(void)y;(void)width;
 #endif
 }
-static void design_gear(lv_draw_ctx_t *ctx,int x,int y,uint32_t c){
-    text(ctx,x,y,28,LV_SYMBOL_SETTINGS,&lv_font_montserrat_20,c,LV_TEXT_ALIGN_CENTER);
+#define DETAIL_SETTINGS_CX 287
+#define DETAIL_SETTINGS_CY 65
+#define DETAIL_SETTINGS_RADIUS 14
+static bool detail_settings_hit(lv_point_t p){
+    int dx=p.x-DETAIL_SETTINGS_CX,dy=p.y-DETAIL_SETTINGS_CY;
+    return dx*dx+dy*dy<=22*22;
+}
+static void design_gear(lv_draw_ctx_t *ctx,int cx,int cy,uint32_t c){
+    // All geometry shares one center; font side bearings cannot shift the gear.
+    rect(ctx,cx-14,cy-14,29,29,mixed(s_skin->bg,s_skin->ink,235),15);
+    frame(ctx,cx-14,cy-14,29,29,mixed(s_skin->ink,s_skin->bg,65),15,1);
+    static const int8_t teeth[][4]={{0,-8,0,-10},{6,-6,7,-7},{8,0,10,0},{6,6,7,7},
+        {0,8,0,10},{-6,6,-7,7},{-8,0,-10,0},{-6,-6,-7,-7}};
+    for(unsigned i=0;i<8;i++)stroke(ctx,cx+teeth[i][0],cy+teeth[i][1],cx+teeth[i][2],cy+teeth[i][3],c,3);
+    lv_draw_arc_dsc_t d;lv_draw_arc_dsc_init(&d);d.width=3;d.color=lv_color_hex(c);
+    lv_point_t center={cx,cy};lv_draw_arc(ctx,&d,&center,8,0,360);
 }
 static const char *matrix_pattern(char c){
     static const char *p[]={"01110100011000110001100011000101110","00100011000010000100001000010001110","01110100010000100010001000100011111","11110000010000101110000010000111110","00010001100101010010111110001000010","11111100001000011110000010000111110","01110100001000011110100011000101110","11111000010001000100010000100001000","01110100011000101110100011000101110","01110100011000101111000010000101110"};
@@ -342,7 +388,7 @@ static void batch1_details(lv_draw_ctx_t *ctx){
             if(id==1){if(i<2)stroke(ctx,x,y-4,x+DESIGN_GRID_W-1,y-4,s_skin->card,1);stroke(ctx,x,y+47,x+DESIGN_GRID_W-1,y+47,s_skin->card,1);}
             else if(id==3||id==4)frame(ctx,x,y,DESIGN_GRID_W,DESIGN_GRID_H,s_skin->ink,9,1);
             else rect(ctx,x,y,DESIGN_GRID_W,DESIGN_GRID_H,id==6?fill[i]:0x49415D,10);
-            icon(ctx,i==0?ICON_PRINT:i==1?ICON_BED:i==2?ICON_TEMP:ICON_SPEED,x+8,y+10,id==1||id==4?0xF56542:id==5?0xD7B8F4:s_skin->ink);
+            metric_icon(ctx,x+9,y+12,i,id==1||id==4?0xF56542:id==5?0xD7B8F4:s_skin->ink);
             text(ctx,x+39,y+1,89,names[i],&bambu_font_16,s_skin->ink,LV_TEXT_ALIGN_LEFT);
             text(ctx,x+39,y+20,89,readings[i],&bambu_bold_18,s_skin->ink,LV_TEXT_ALIGN_LEFT);
         }
