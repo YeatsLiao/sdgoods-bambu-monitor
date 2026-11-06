@@ -22,6 +22,14 @@ AMS 1 是盒子类型与序号。普通盒标题可显示 AMS / AMS Lite / AMS 2
 
 ## 当前代码状态
 
+v0.3.8 统一规范化大小写、空格、连字符和下划线后作白名单精确匹配。支持15个名称：X1/X1C/X1E、P1P/P1S/P2S、A1/A1 mini/A2L、H2D/H2D Pro/H2S/H2C/H3C、X2D。名称清单依据官方 [BBL 索引](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL.json)。H3C目前只接受官方名称，不猜尚未核实的代码。
+
+已核实的官方 machine_model 代码：BL-P001→X1C、BL-P002→X1、C13→X1E、C11→P1P、C12→P1S、N1→A1 mini、N2S→A1；新增 [N7→P2S](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20P2S.json)、[N6→X2D](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20X2D.json)、[N9→A2L](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20A2L.json)、[O1S→H2S](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20H2S.json)、[O1C2→H2C](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20H2C.json)、[O1E→H2D Pro](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20H2D%20Pro.json)，继续 O1D→H2D。每个代码都通过实际 C 解析测试；这不代表所有机型都已做真机连接测试。
+
+v0.3.7 补齐 X1C OTA 的 `Bambu Lab X1-Carbon` 名称。此前仅接受 `Bambu Lab X1 Carbon`，有连字符的实际应答会被白名单拒绝，回退 BAMBU。名称实例来自设备用户直接上传的 [X1C get_version 诊断记录](https://github.com/greghesp/ha-bambulab/issues/1465)，不是本用户 COM6 的捕获；不根据 AP04/AP05 等主板版本猜型号。
+
+get_version 查询由后台服务在订阅成功后发起（轮询周期2秒），缺少型号时每6秒重试，最多3次；取得型号立即停止重试，重连后重新查询。串口记录 `Printer model query N/3` 和 `Printer model identified: X1C`。仅身份应答不再误报成无有效遥测的忽略警告；仍不作为配对证明或刷新遥测时间。首页和详情页通过现有500ms快照刷新读取型号，无需改皮肤。
+
 v0.3.3 已移植 printer_model、订阅后 get_version 查询及身份独立提交。解析测试覆盖型号代码/名称、忽略 AMS 模块、未知/失败不覆盖、重新连接清空、身份不刷新遥测时间且不作为配对证明。用户设备的实际返回字段仍需 COM6 真机核对。
 
 HT 烘干状态与分钟数按官方 [DevFilaSystem.cpp](https://github.com/bambulab/BambuStudio/blob/master/src/slic3r/GUI/DeviceCore/DevFilaSystem.cpp) 的 info 位 4–7、dry_time 解析；枚举来自 [DevFilaSystem.h](https://github.com/bambulab/BambuStudio/blob/master/src/slic3r/GUI/DeviceCore/DevFilaSystem.h)：0 待机、1 检查、2 烘干、3 冷却、4 停止、5/6 异常，未支持值显示 --。dry_time 单位为分钟。只显示监控信息，不发烘干控制指令。

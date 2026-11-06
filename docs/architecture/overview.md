@@ -1,53 +1,38 @@
-# 架构与官方层边界
+# 现行架构 · 0.3.9
 
-## 依赖方向
+## 分层与线程
 
-`main/main.c` 装配应用 → `main/apps` 界面与皮肤 → `main/bambu` 偏好、连接与数据模型。
-应用通过官方公开 API 调用 `components/sdgoods_board` 和 `components/sdgoods_launcher`；官方组件不包含任何拓竹业务头文件。
+main/main.c 是唯一装配点，负责显示/触摸初始化顺序以及服务和UI轮询接入。
 
-| 目录 | 责任 | 修改约定 |
-|---|---|---|
-| components/sdgoods_board | 官方显示、触摸、电源、系统语言、控制中心外壳、截图 | 原样保留 |
-| components/sdgoods_launcher | 官方控制中心、设备模式检测、退出启动器、应用槽接口 | 原样保留 |
-| platform | 官方分区表与本地参考引导层 | 原样保留，不打进应用包 |
-| components/jpegenc | 官方截图依赖 | 原样保留 |
-| components/lvgl | 本地离线 LVGL 8.3 依赖及已有上游平台补丁 | 第三方依赖，不放应用逻辑 |
-| components/dns_server | 局域网配网 DNS 组件 | 通用依赖 |
-| main/main.c | 初始化顺序、导航与轮询回调注册 | 唯一装配点 |
-| main/bambu/bambu_state、bambu_report | 线程安全状态快照、真实增量 JSON 解析与 AMS 模型 | 与 UI 无关 |
-| main/bambu/bambu_mqtt | 局域网 Wi-Fi / MQTT-TLS 连接及分片重组 | 后台服务调用 |
-| main/bambu/wifi_prov、prov_form、pairing_probe | 手机本地配网、表单校验、真实配对验证、试运行与回滚 | 后台服务调用 |
-| main/bambu/monitor_service | 唯一网络生命周期任务、UI 请求队列、状态快照 | 禁止调用 LVGL |
-| main/bambu/monitor_preferences | 本应用皮肤、熄屏、亮屏提醒偏好 | 独立命名空间 bmb_prefs |
-| main/apps/ui_monitor | 四组页面、设置、翻页、熄屏唤醒 | 仅 LVGL 主线程 |
-| main/apps/monitor_skin | 稳定皮肤 ID、配色、插画选择 | 共享页面与业务数据 |
-| main/assets、main/fonts | 本应用插画与字体生成物 | 不改官方字体 |
-| tools/preview | 本机真实 LVGL 渲染和交互检查 | 示例数据只存在于测试程序 |
+官方平台：components/sdgoods_board、sdgoods_launcher、jpegenc 以及 platform 原样保留，通过官方公开API调用。components/lvgl 是本地离线依赖和既有平台补丁；通用DNS组件不包含打印业务。
 
-## 与官方服务共存
+数据层：main/bambu/bambu_report 解析真实JSON增量与身份，bambu_state 发布带锁快照，bambu_pages 按实际AMS/HT拓扑生成页面。解析、分页不依赖LVGL。身份应答不冒充配对证明或刷新遥测时效，未知值保持未知。
 
-- 不调用启动器宿主的 boot_check，不扫描或修改其他应用的 manifest，不修改分区。
-- 控制中心始终由官方组件提供；`sdgoods_app_shell_bind` 接入顶部下滑，官方 Exit 返回启动器。
-- 基于当前电台配置：先初始化显示/触摸，再初始化其他服务；LVGL 使用自定义分配器，通用分配可使用 PSRAM。保持官方显示缓冲、QSPI 分片及驱动参数不变。
-- 网络由拓竹服务独占初始化/拆卸；main 不再并行调用 `sdgoods_wifi_init`。Wi-Fi 驱动设置为 RAM 存储，避免覆盖共享系统的 Wi-Fi 凭据记录。
-- 网络配置独立存入 `bmb_net`；应用偏好存 `bmb_prefs`。应用业务层不擦除整个 NVS。
-- 亮度由官方控制中心管理。应用自动熄屏只临时设置背光 0，恢复时读取官方用户亮度，不保存临时熄屏值。
-- 横向翻页只接收监控页中部起手的水平滑动；顶部和底部系统手势区域留给官方外壳。设置点按复用官方位移守卫。
+连接与配置：bambu_mqtt 负责Wi-Fi/MQTT-TLS、订阅和分片；wifi_prov/prov_form/pairing_probe 负责手机配网、输入校验及真实配对验证；app_config 管理试运行、确认及回滚。monitor_service 是唯一网络生命周期任务，通过队列接收UI请求，不调用LVGL。
+
+应用偏好：monitor_preferences 管理皮肤、熄屏和提醒，属于应用设置；目前保留在 main/bambu 目录，不因本轮资料整理搬动源码。
+
+UI层：main/apps/ui_monitor 在LVGL线程读取服务/数据快照，处理绘制、翻页、设置与唤醒。ui_monitor_design.inc、batch2.inc、batch3.inc 分别绘制三批；layout.inc 管理共享几何，settings.inc 管理设置界面。monitor_skin 管理稳定ID与配色，monitor_art 管理当前单图解码缓存。
+
+资源层：main/assets、main/fonts 为固件直接输入；docs/assets 保存原图、图集、许可及可校验镜像。tools 下的编码、字体、预览、配对解析测试和打包脚本用于生成或验证，不进入业务UI。
+
+## 数据流
+
+打印机报告经 MQTT 分片重组进入解析器，合并为带锁状态快照；UI每500ms读取快照，由分页模型选择逻辑页面，再按皮肤绘制。UI不直接操控网络生命周期；配网启停通过服务请求队列完成。
+
+页面顺序为首页、普通AMS、外置＋HT、详情。四类逻辑页面不等于固定四个物理页，多盒按拓扑展开。所有型号和实时数值由程序绘制，不写死在插画里。
+
+## 不变量
+
+- 官方82文件与radio逐字节比对；官方控制中心提供亮度、声音和退出。
+- 不擦除共享NVS；网络配置使用 bmb_net，偏好使用 bmb_prefs。Wi-Fi使用RAM存储。
+- LVGL绘制及图像缓存仅由UI线程拥有；后台网络服务不持有界面对象。
+- 场景压缩图仅缓存当前一张，解码上限61,440字节，切换前失效旧缓存。
+- 设置中部右滑复用同一个返回入口；配网取消由后台完成。拖动、唤醒首触及系统手势隔离，详见设置规范。
+- 三批共用同一数据模型，原始设计、软件预览和真机反馈分别管理。
 
 ## 构建与交付
 
-项目统一使用标准 ESP-IDF 流程：`idf.py build` → `idf.py merge-bin`，构建目录为 `build/`，根目录 `sdkconfig` 保存本地配置，`sdkconfig.defaults` 默认包含全部 18 款皮肤。芯片固定为 ESP32-S3；皮肤在设置中切换，无需分批编译。历史分批构建和容量报告仅作为开发记录保留。
+标准单工程 build 目录，ESP32-S3，ESP-IDF 5.5.x。本机5.5.5；命令以根README为准。dist 中为官方纯应用包，build/sdgoods-bambu-monitor-full.bin 为完整本地烧录镜像，两种用途分别校验。
 
-本地烧录使用 `idf.py -p COM6 flash`；也可将 `build/merged-binary.bin` 复制为 `build/sdgoods-bambu-monitor-full.bin` 后，用 esptool 从 `0x0` 写入。完整镜像按 IDF 构建清单合并，包含 NVS 区域的 FF 填充，会重置该范围内设置。原版 `platform/prebuilt` 仍原样保留。
-
-`python tools/pack_app.py --name BambuMonitor_app.bin` 从标准 `build/` 导出纯应用包，默认遵守官方 2.9 MiB 上限，用于官方平台管理应用槽。完整镜像与纯应用包的用途见根目录 README。
-
-## 当前实现与目标的差距
-
-v0.3.3 候选已接入型号查询与动态文字、统一四组分页、外置/HT 合并监控、透明猫咪探头和按实测字宽适配。生产代码渲染图保存在 verification/preview；此前 15:10 的真机照片仍是反馈依据，不能把软件检查替代真机视觉验收。第一批按 [当前四页规范](../design/batch-01/SPEC.md) 对照；第二批0.3.4已重做最初原图还原候选，第三批0.3.5已恢复大场景、角色横幅、AMS和详情候选。第二/三批分别在 ui_monitor_batch2.inc、ui_monitor_batch3.inc 绘制，继续共用数据/分页与字宽规则。
-
-当前原型、素材、验证、历史目录分别负责目标、原始/运行资源、证据、旧记录。历史构建缓存在 build/history，本机渲染缓存为 build/preview；项目仍是标准单工程，官方层不改。
-
-## 第三组素材缓存
-
-monitor_art.c/h负责当前单张调色板游程图展开，最大61,440字节，LVGL线程独占；源数据在flash，切换前使旧图缓存失效。编码脚本、原始PNG、量化策略与验证结果见第三组报告。旧通用占位绘制已移除，数据/分页仍共享。
+本轮收尾仅调整文档、目录索引、归档工具和保存策略，不拆分当前稳定运行代码。0.3.9触控仍待用户真机确认；第二、三批HT页仍缺单独批准原型。

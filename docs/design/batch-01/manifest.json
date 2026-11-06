@@ -86,5 +86,10 @@
       "status": "runtime-v0.3.3-candidate-device-review-pending"
     }
   ],
-  "runtimeCandidate": "0.3.3"
+  "runtimeCandidate": "0.3.3",
+  "polishCandidate": "0.3.6",
+  "polishVerification": "../../verification/ui-polish-0.3.6.md",
+  "currentRuntimeVersion": "0.3.9",
+  "currentRuntimeVerification": "../../verification/CURRENT-STATUS.md",
+  "acceptanceNote": "用户反馈整体基本正常；0.3.9设置触控待真机确认；原型图批准状态不因此改变。"
 }

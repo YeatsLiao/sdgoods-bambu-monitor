@@ -27,10 +27,15 @@
       "status": "original-reference-unchanged"
     }
   ],
-  "runtimeStatus": "0.3.5-original-design-restoration-candidate-device-pending",
+  "runtimeStatus": "implemented-original-style-latest-settings-gesture-device-pending",
   "accessoriesReference": null,
   "accessoriesStatus": "theme-extension-candidate-no-approved-reference",
   "note": "原始三张原型保持原样；外置摘要从 AMS 移到第三组，详情归第四组。运行截图不替代原型。",
   "normativeSpec": "SPEC.md",
-  "runtimeSource": "main/apps/ui_monitor_batch3.inc"
+  "runtimeSource": "main/apps/ui_monitor_batch3.inc",
+  "polishCandidate": "0.3.6",
+  "polishVerification": "../../verification/ui-polish-0.3.6.md",
+  "currentRuntimeVersion": "0.3.9",
+  "currentRuntimeVerification": "../../verification/CURRENT-STATUS.md",
+  "acceptanceNote": "用户反馈整体基本正常；0.3.9设置触控待真机确认；原型图批准状态不因此改变。"
 }
