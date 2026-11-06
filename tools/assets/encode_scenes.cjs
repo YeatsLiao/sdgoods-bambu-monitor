@@ -1,7 +1,7 @@
 /* Encode isolated ImageGen decorations as RGB565+alpha; preserve source PNG. */
 const fs=require('fs'),path=require('path');
 const {PNG}=require(process.argv[2]);
-const root=path.resolve(__dirname,'..');
+const root=path.resolve(__dirname,'../..');
 const src=PNG.sync.read(fs.readFileSync(path.join(root,'main/assets/batch-01-scenes-v2.png')));
 const specs=[['printer',168,142],['cat',264,158],['night',288,172]];
 for(let cell=0;cell<3;cell++) {

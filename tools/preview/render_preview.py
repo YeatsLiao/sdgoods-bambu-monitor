@@ -3,9 +3,9 @@
 """Compile and render the real LVGL view on Windows without flashing a device."""
 from pathlib import Path
 import subprocess,os
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 def main():
-    out=ROOT/'build/preview';out.mkdir(exist_ok=True)
+    out=ROOT/'build/preview';out.mkdir(parents=True,exist_ok=True)
     shots=ROOT/'docs/verification/preview';shots.mkdir(parents=True,exist_ok=True)
     cc='D:/1.Soft/msys64/mingw64/bin/gcc.exe'
     env=dict(os.environ);env['PATH']=str(Path(cc).parent)+os.pathsep+env.get('PATH','')

@@ -7,7 +7,7 @@ param(
     [switch]$DryRun
 )
 $ErrorActionPreference='Stop'
-$projectRoot=Split-Path $PSScriptRoot -Parent
+$projectRoot=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $full=Join-Path $projectRoot 'build\sdgoods-bambu-monitor-full.bin'
 foreach($file in @($EspPython,$full)) {
     if(-not (Test-Path -LiteralPath $file -PathType Leaf)){throw "Missing file: $file"}

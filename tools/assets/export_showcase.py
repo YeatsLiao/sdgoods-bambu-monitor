@@ -4,7 +4,7 @@ from pathlib import Path
 import hashlib,json,shutil
 from PIL import Image
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 SOURCE=ROOT/'docs/verification/preview'
 OUT=ROOT/'docs/assets/showcase'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()

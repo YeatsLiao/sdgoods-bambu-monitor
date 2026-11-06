@@ -4,7 +4,7 @@ from pathlib import Path
 import hashlib,json,re,sys
 from urllib.parse import unquote
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 DOCS=ROOT/'docs'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 

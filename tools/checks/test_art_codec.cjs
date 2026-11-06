@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT; deterministic PackBits roundtrip and palette bounds. */
-const assert=require('assert'),{pack,quantize}=require('./encode_batch3.cjs');
+const assert=require('assert'),{pack,quantize}=require('../assets/encode_batch3.cjs');
 function unpack(data){const out=[];for(let i=0;i<data.length;){const c=data[i++],n=(c&127)+1;if(c&128){assert(i<data.length);out.push(...Array(n).fill(data[i++]));}else{assert(i+n<=data.length);out.push(...data.slice(i,i+n));i+=n;}}return out;}
 let seed=123;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed&255;};
 for(const n of [0,1,2,3,127,128,129,255,256,10000]){

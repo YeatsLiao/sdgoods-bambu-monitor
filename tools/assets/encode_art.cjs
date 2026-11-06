@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const pngModule = process.argv[2];
 const {PNG} = require(pngModule);
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const batch=Number(process.argv[3]||1);
 if(![1,2,3].includes(batch))throw new Error('Batch must be 1, 2 or 3');
 const columns=batch===2?2:3,rows=batch===1?1:2;

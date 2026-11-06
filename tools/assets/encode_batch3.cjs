@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: MIT. Palette quantization and lossless PackBits.
  * Original PNGs remain archived; no UI text is baked into encoded artwork. */
 const fs=require('fs'),path=require('path');
-const root=path.resolve(__dirname,'..');
+const root=path.resolve(__dirname,'../..');
 function pack(indices){
  const out=[];let i=0;
  while(i<indices.length){

@@ -5,7 +5,7 @@ import argparse, hashlib, json, re
 from collections import defaultdict
 from PIL import Image
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'docs/assets/catalog.json'
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def rel(p): return p.relative_to(ROOT).as_posix()
@@ -52,7 +52,7 @@ def main():
                 'originals':[i['path'] for i in originals if i['sha256']==sha(atlas)]})
         active=('assets/'+p.name in cmake and any(s in ui for s in symbols))
         runtime.append({'runtime':rel(p),'mirror':'docs/assets/runtime-encoded/'+p.name,'sha256':sha(p),
-            'symbols':symbols,'sources':source_items,'encoder':'tools/'+script,
+            'symbols':symbols,'sources':source_items,'encoder':'tools/assets/'+script,
             'status':'referenced-by-current-ui' if active else 'retained-legacy-not-referenced-by-current-ui'})
     names=re.findall(r'\{"([^"\n]+)","([^"\n]+)",0x',(ROOT/'main/apps/monitor_skin.c').read_text(encoding='utf-8'))
     art={1:[],2:[],3:['scene_printer.c'],4:['scene_cat.c','cat_peek.c'],5:['scene_night.c'],6:[],
@@ -71,12 +71,12 @@ def main():
             'accessoryReferenceStatus':refs.get('accessoriesStatus','see-current-four-page-spec')})
     result={'schema':1,'version':(ROOT/'version.txt').read_text().strip(),'generatedOriginals':originals,
         'runtimeAssets':runtime,'skins':skins,'fonts':{'source':'docs/assets/fonts/source','generated':'docs/assets/fonts/generated',
-        'license':'main/fonts/OFL.txt','generator':'tools/generate_fonts.py'},
+        'license':'main/fonts/OFL.txt','generator':'tools/assets/generate_fonts.py'},
         'duplicates':[{'sha256':key,'copies':sorted(value),'policy':'retain-all'} for key,value in sorted(hashes.items()) if len(value)>1],
         'counts':{'originals':len(originals),'runtimeAssets':len(runtime),'skins':len(skins),'indexedMediaAndResources':len(records)}}
     if args.check:
         existing=json.loads(OUT.read_text(encoding='utf-8'))
-        if existing!=result: raise SystemExit('Asset catalog stale: run python tools/catalog_assets.py')
+        if existing!=result: raise SystemExit('Asset catalog stale: run python tools/assets/catalog_assets.py')
     else: OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('PASS: media coverage, original hashes, 18 skin lineages, runtime/source/encoder mapping; '+('catalog current' if args.check else 'catalog written'))
 

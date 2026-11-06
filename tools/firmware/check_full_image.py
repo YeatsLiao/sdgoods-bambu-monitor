@@ -3,7 +3,7 @@
 """Verify idf.py merge-bin output against its actual flash component map."""
 from pathlib import Path
 import argparse,hashlib,json
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 def main():
     p=argparse.ArgumentParser();p.add_argument('--build-dir',required=True);p.add_argument('--image',required=True)
     args=p.parse_args();build=ROOT/args.build_dir;image=ROOT/args.image

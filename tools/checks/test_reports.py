@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 """Run the actual embedded report reader on the host (no printer needed).
 
-python tools/test_reports.py --idf D:/.../esp-idf-v5.5.5
+python tools/checks/test_reports.py --idf D:/.../esp-idf-v5.5.5
 Requires a native C compiler (GCC/Clang), and ESP-IDF's bundled cJSON source.
 """
 import argparse
@@ -11,7 +11,7 @@ import shutil
 import subprocess
 import tempfile
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 PROBE = r'''
 #include "bambu_report.h"
 #include "pairing_probe.h"

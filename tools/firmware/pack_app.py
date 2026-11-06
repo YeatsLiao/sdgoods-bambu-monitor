@@ -17,11 +17,11 @@
 
 用法：
 
-    python3 tools/pack_app.py                    # build/ → dist/SDGOODS_RADIO_app.bin
-    python3 tools/pack_app.py -b build_pub       # 指定构建目录
-    python3 tools/pack_app.py -i some.bin        # 直接校验/导出某个文件
-    python3 tools/pack_app.py --json             # 结构化输出（给 AI 助手、CI 用）
-    python3 tools/pack_app.py --no-emit          # 只校验，不写 dist/
+    python3 tools/firmware/pack_app.py                    # build/ → dist/BambuMonitor_app.bin
+    python3 tools/firmware/pack_app.py -b build_pub       # 指定构建目录
+    python3 tools/firmware/pack_app.py -i some.bin        # 直接校验/导出某个文件
+    python3 tools/firmware/pack_app.py --json             # 结构化输出（给 AI 助手、CI 用）
+    python3 tools/firmware/pack_app.py --no-emit          # 只校验，不写 dist/
 
 校验项（任一不过即拒绝）：
 
@@ -46,7 +46,7 @@ import struct
 import sys
 
 # --------------------------------------------------------------------------- 常量
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ESP 镜像格式（components/bootloader_support/include/esp_app_format.h）
 APP_IMAGE_MAGIC = 0xE9            # esp_image_header_t.magic
@@ -346,8 +346,8 @@ def build_parser():
         description="校验并导出「不带地址」的应用包（app.bin）",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="示例：\n"
-               "  python3 tools/pack_app.py                 # build/ → dist/\n"
-               "  python3 tools/pack_app.py --json           # 给 AI / CI 用\n",
+               "  python3 tools/firmware/pack_app.py                 # build/ → dist/\n"
+               "  python3 tools/firmware/pack_app.py --json           # 给 AI / CI 用\n",
     )
     p.add_argument("-i", "--input", help="要校验的 bin（默认自动找 build*/<项目名>.bin）")
     p.add_argument("-b", "--build-dir", help="构建目录（如 build_pub）；默认自动挑选")

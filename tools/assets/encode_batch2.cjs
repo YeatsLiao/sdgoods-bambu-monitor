@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT; preserve PNG sources, crop/scale/encode only. */
 const fs=require('fs'),path=require('path'),{PNG}=require(process.argv[2]);
-const root=path.resolve(__dirname,'..');
+const root=path.resolve(__dirname,'../..');
 const atlas=PNG.sync.read(fs.readFileSync(path.join(root,'main/assets/batch-02-sprites-v2.png')));
 const specs=[['art_handheld','bambu_art_handheld',176,94],['art_robot','bambu_art_robot',140,124],
  ['art_bamboo','bambu_art_bamboo',190,106],['art_space','bambu_art_space',190,106],

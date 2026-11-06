@@ -18,14 +18,14 @@ if(Test-Path -LiteralPath $romRoot) {
     $romSet=Get-ChildItem -LiteralPath $romRoot -Directory | Sort-Object Name -Descending | Select-Object -First 1
     $env:ESP_ROM_ELF_DIR=$romSet.FullName
 }
-$projectRoot=Split-Path $PSScriptRoot -Parent
+$projectRoot=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 Set-Location $projectRoot
 $actions=if($Merge){@('build','merge-bin')}else{@('build')}
 & "$env:IDF_PYTHON_ENV_PATH\Scripts\python.exe" "$env:IDF_PATH\tools\idf.py" @actions
 if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
 if($Merge) {
     Copy-Item -LiteralPath "$projectRoot\build\merged-binary.bin" -Destination "$projectRoot\build\sdgoods-bambu-monitor-full.bin"
-    & "$env:IDF_PYTHON_ENV_PATH\Scripts\python.exe" "$projectRoot\tools\check_full_image.py" --build-dir build --image build/sdgoods-bambu-monitor-full.bin
+    & "$env:IDF_PYTHON_ENV_PATH\Scripts\python.exe" "$projectRoot\tools\firmware\check_full_image.py" --build-dir build --image build/sdgoods-bambu-monitor-full.bin
     exit $LASTEXITCODE
 }
 exit 0

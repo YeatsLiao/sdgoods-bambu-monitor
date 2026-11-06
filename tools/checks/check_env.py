@@ -15,8 +15,8 @@
 它会逐项报出「缺什么、怎么装」，避免编译到一半才发现 ESP-IDF 没装、或改了中文
 却没装 lv_font_conv 导致烧出满屏方框。
 
-    python3 tools/check_env.py            # 人类可读表格 + 退出码
-    python3 tools/check_env.py --json     # 给 AI / CI 解析的结构化输出
+    python3 tools/checks/check_env.py            # 人类可读表格 + 退出码
+    python3 tools/checks/check_env.py --json     # 给 AI / CI 解析的结构化输出
 
 退出码：
     0  所有 MUST 项齐全（可以开始编译）
@@ -174,7 +174,7 @@ def check_node_npm():
         return "WARN", "node %s（过旧）" % out, \
             "lv_font_conv 需要 Node >= %d.%d，请升级。" % MIN_NODE, False
     return "WARN", "未安装 node/npm", \
-        "仅当你要改/增中文文案（重跑 tools/gen_fonts.py）时才需要：\n" \
+        "仅当你要改/增中文文案（重跑 tools/assets/generate_fonts.py）时才需要：\n" \
         "    npm i lv_font_conv        # 装字体转换工具\n" \
         "不碰中文文案则无需安装，可直接编译。", False
 
@@ -261,10 +261,10 @@ def main():
         print("-" * 56)
     if n_fail:
         print("✗ 有 %d 项 MUST 缺失，无法编译/烧录。先按上面提示补齐。" % n_fail)
-        print("  详见 docs/ENVIRONMENT.md")
+        print("  详见 README.md")
         return 1
     print("✓ 编译/烧录所需环境齐全。改中文文案前再确认 node/npm（见 WARN 项）。")
-    print("  下一步：idf.py build  （或 python3 tools/new_app_project.py <name> 派生独立应用工程）")
+    print("  下一步：idf.py build")
     return 0
 
 

@@ -4,7 +4,7 @@
 from pathlib import Path
 import argparse,datetime,json,os,struct,sys
 import esptool
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 def app_name(header):
     if len(header)>=112 and header[0]==0xe9 and struct.unpack_from('<I',header,32)[0]==0xabcd5432:
         return header[80:112].split(b'\0')[0].decode('ascii','replace')

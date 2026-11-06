@@ -3,7 +3,7 @@
 from pathlib import Path
 import hashlib, json, re, shutil, os
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / 'docs'
 HISTORY = DOCS / 'history'
 MEDIA = {'.png', '.jpg', '.jpeg', '.webp', '.ppm', '.gif', '.c', '.ttf', '.otf', '.bin'}
@@ -20,7 +20,7 @@ def checked(p):
 def main():
     ledger = HISTORY / 'migration-20261105.json'
     if ledger.exists():
-        raise SystemExit('Migration already recorded; use tools/check_docs.py to verify.')
+        raise SystemExit('Migration already recorded; use tools/checks/check_docs.py to verify.')
     before = [{'path':p.relative_to(ROOT).as_posix(),'sha256':sha(p),'bytes':p.stat().st_size}
               for p in sorted(DOCS.rglob('*')) if p.is_file() and p.suffix.lower() in MEDIA]
     old_md = {p.resolve():p.read_text(encoding='utf-8') for p in DOCS.rglob('*.md')}
@@ -95,7 +95,7 @@ def main():
     HISTORY.mkdir(parents=True,exist_ok=True)
     ledger.write_text(json.dumps({'mediaBefore':before,'moves':moves},ensure_ascii=False,indent=2),encoding='utf-8')
     # Update source/tool references; application behavior stays unchanged.
-    p=ROOT/'tools/render_preview.py'
+    p=ROOT/'tools/preview/render_preview.py'
     p.write_text(p.read_text(encoding='utf-8').replace("ROOT/'build-preview'","ROOT/'build/preview'"),encoding='utf-8')
     for p in (ROOT/'main/bambu').iterdir():
         if p.suffix in ('.c','.h'):

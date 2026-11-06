@@ -9,7 +9,7 @@ import argparse, hashlib, json, zipfile
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 SKIP = {'.git', 'backups', 'node_modules', '__pycache__', 'managed_components'}
 
 def digest(path):

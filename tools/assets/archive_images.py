@@ -3,7 +3,7 @@
 """Preserve generated originals and release previews, with a verifiable docs index."""
 from pathlib import Path
 import argparse,hashlib,json,shutil
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 IMAGE_TYPES={'.png','.jpg','.jpeg','.webp','.gif','.ppm'}
 LABELS={
     'exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png':'竹林装饰填色透明竹叶精修',

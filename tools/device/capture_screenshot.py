@@ -9,7 +9,7 @@ import sys
 
 from screenshot_recv import run
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_DIR = ROOT / 'docs' / 'verification' / 'device' / 'screenshots'
 
 

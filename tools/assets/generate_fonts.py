@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse
 import re
 import subprocess
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--converter',required=True,help='lv_font_conv.js path')
