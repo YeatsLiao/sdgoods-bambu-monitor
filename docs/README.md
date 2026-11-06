@@ -7,6 +7,8 @@
 - [架构入口](architecture/README.md)：官方边界、线程、数据流和模块维护位置。
 - [当前验证状态](verification/CURRENT-STATUS.md)：区分软件通过、用户反馈与待验项。
 - [历史资料](history/README.md)：旧原型、旧稿、提示词及冻结预览，保留追溯。
-- [收尾与备份记录](verification/closeout-0.3.9.md)：归档范围、校验方法与交付位置。
+- [收尾与备份记录](verification/reports/closeout-0.3.9.md)：归档范围、校验方法与交付位置。
 
 原型定义目标，素材保存来源，软件预览提供实现证据，真机截图提供设备证据；四者按各自入口使用。
+
+工具分类见 [tools/README](../tools/README.md)，版本报告集中在 [verification/reports](verification/reports/README.md)，Git范围见 [architecture/git](architecture/git.md)。

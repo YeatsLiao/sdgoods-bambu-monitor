@@ -150,7 +150,7 @@ idf.py -p COM6 monitor
 完成构建后执行：
 
 ```powershell
-python tools/pack_app.py --name BambuMonitor_app.bin
+python tools/firmware/pack_app.py --name BambuMonitor_app.bin
 ```
 
 输出 `dist/BambuMonitor_app.bin` 及校验元数据，用于 SDGoods 官方平台安装和切换应用。打包工具会校验镜像类型与容量。
@@ -181,9 +181,10 @@ docs/       设计、素材、架构、验证和历史资料
 ```
 
 - [文档总入口](docs/README.md)：当前设计、架构及验证资料。
+- [工具分类](tools/README.md)：打包、截图、素材生成及检查命令。
 - [架构说明](docs/architecture/README.md)：官方层与应用层边界、线程和数据流。
 - [素材导航](docs/assets/CATALOG.md)：原型、原图、字体、编码与转换脚本的对应关系。
-- [Git 提交范围](docs/GIT.md)：源码和核心素材的提交规则。
+- [Git 提交范围](docs/architecture/git.md)：源码和核心素材的提交规则。
 
 原图、原型、字体源及真机反馈随项目保存。批量软件渲染帧、编译产物和私有完整备份保留本地，具体保存范围见素材与 Git 说明。
 
