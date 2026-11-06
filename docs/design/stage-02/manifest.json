@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "updated": "2026-11-05",
+  "pages": [
+    {
+      "page": 1,
+      "role": "overview",
+      "file": "page-1-overview.png",
+      "sha256": "7e7740e66fab7cea6f3c2a83744af27b09a425ced15622ab51e178378aca3ea1",
+      "sourceOriginal": "../../assets/images/exec-0bf26a6a-eef7-4909-9138-5aa9962393da.png",
+      "status": "original-reference-unchanged"
+    },
+    {
+      "page": 2,
+      "role": "ams",
+      "file": "page-2-ams.png",
+      "sha256": "f6cb9edf00e3f8cb319a4358d3b503858487642515963a9d316b734173c33088",
+      "sourceOriginal": "../../assets/images/exec-72c6bf30-c7e9-4de2-8549-e908edc0f4b9.png",
+      "status": "original-reference-unchanged"
+    },
+    {
+      "page": 4,
+      "role": "details",
+      "file": "page-4-details.png",
+      "sha256": "d3c5c594533d1cfca2d70a602b06a5f891250e25574ac20841b6a2e48562c08f",
+      "sourceOriginal": "../../assets/images/exec-42b3d834-f3fc-4467-87bc-ec4ebfb045c9.png",
+      "status": "original-reference-unchanged"
+    }
+  ],
+  "runtimeStatus": "implemented-original-style-latest-settings-gesture-device-pending",
+  "accessoriesReference": null,
+  "accessoriesStatus": "theme-extension-candidate-no-approved-reference",
+  "note": "原始三张原型保持原样；外置摘要从 AMS 移到第三组，详情归第四组。运行截图不替代原型。",
+  "polishCandidate": "0.3.6",
+  "polishVerification": "../../notes/archive-index.md",
+  "currentRuntimeVersion": "0.3.9",
+  "currentRuntimeVerification": "../../notes/status.md",
+  "acceptanceNote": "用户反馈整体基本正常；0.3.9设置触控待真机确认；原型图批准状态不因此改变。"
+}

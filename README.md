@@ -12,25 +12,25 @@
 
 大字进度 · 点阵终端 · 像素工坊 · 猫咪监工 · 夜班打印室 · 彩色料仓
 
-![01至06款风格首页总览](docs/assets/showcase/first-six-skins.png)
+![01至06款风格首页总览](docs/screenshots/software/first-six-skins.png)
 
 ### 07–12
 
 纸感标签 · 掌机像素 · 机器人助手 · 竹林工坊 · 太空货舱 · 拼色几何
 
-![07至12款风格首页总览](docs/assets/showcase/second-six-skins.png)
+![07至12款风格首页总览](docs/screenshots/software/second-six-skins.png)
 
 ### 13–18
 
 农场造物 · 赛博街区 · 海底实验室 · 雪山木屋 · 沙漠基地 · 魔法工坊
 
-![13至18款风格首页总览](docs/assets/showcase/third-six-skins.png)
+![13至18款风格首页总览](docs/screenshots/software/third-six-skins.png)
 
 ### 设置与选肤
 
 第一行：应用设置、外观与语言、熄屏设置。第二行：网络与打印机、手机配网、全屏皮肤预览。
 
-![设置、手机配网和皮肤选择总览](docs/assets/showcase/settings-six-pages.png)
+![设置、手机配网和皮肤选择总览](docs/screenshots/software/settings-six-pages.png)
 
 ### 各风格完整页面
 
@@ -39,21 +39,21 @@
 <details>
 <summary>01–06：四类页面完整预览</summary>
 
-![01至06款四类页面](docs/assets/showcase/skins-01-06-all-pages.png)
+![01至06款四类页面](docs/screenshots/software/skins-01-06-all-pages.png)
 
 </details>
 
 <details>
 <summary>07–12：四类页面完整预览</summary>
 
-![07至12款四类页面](docs/assets/showcase/skins-07-12-all-pages.png)
+![07至12款四类页面](docs/screenshots/software/skins-07-12-all-pages.png)
 
 </details>
 
 <details>
 <summary>13–18：四类页面完整预览</summary>
 
-![13至18款四类页面](docs/assets/showcase/skins-13-18-all-pages.png)
+![13至18款四类页面](docs/screenshots/software/skins-13-18-all-pages.png)
 
 </details>
 
@@ -159,7 +159,7 @@ python tools/firmware/pack_app.py --name BambuMonitor_app.bin
 
 ## 真机截图
 
-连接设备并停留在目标页面，双击项目根目录的 **串口截图.cmd**，默认使用 COM6。截图按时间命名保存到 `docs/verification/device/screenshots/`，接收完成后自动打开。
+连接设备并停留在目标页面，双击项目根目录的 **串口截图.cmd**，默认使用 COM6。截图按时间命名保存到 `docs/screenshots/device/`，接收完成后自动打开。
 
 截图前退出串口监视器及其他占用 COM6 的程序。设备发送 JPEG 时保存为 `.jpg`，原始像素回退时保存为 `.png`。
 
@@ -182,9 +182,9 @@ docs/       设计、素材、架构、验证和历史资料
 
 - [文档总入口](docs/README.md)：当前设计、架构及验证资料。
 - [工具分类](tools/README.md)：打包、截图、素材生成及检查命令。
-- [架构说明](docs/architecture/README.md)：官方层与应用层边界、线程和数据流。
-- [素材导航](docs/assets/CATALOG.md)：原型、原图、字体、编码与转换脚本的对应关系。
-- [Git 提交范围](docs/architecture/git.md)：源码和核心素材的提交规则。
+- [架构说明](docs/notes/architecture.md)：官方层与应用层边界、线程和数据流。
+- [素材导航](docs/assets/README.md)：原型、原图、字体、编码与转换脚本的对应关系。
+- [Git 提交范围](docs/notes/development.md)：源码和核心素材的提交规则。
 
 原图、原型、字体源及真机反馈随项目保存。批量软件渲染帧、编译产物和私有完整备份保留本地，具体保存范围见素材与 Git 说明。
 
@@ -192,7 +192,7 @@ docs/       设计、素材、架构、验证和历史资料
 
 18 款皮肤及监控、配网、设置功能已实现。0.3.9 已通过标准构建和软件交互检查；该版本的设置按钮与右滑返回仍待真机确认。第二、三组外置 / HT 页按主题延展候选管理。
 
-最新验收情况见 [当前状态](docs/verification/CURRENT-STATUS.md)，历史开发报告从文档目录查阅。
+最新验收情况见 [当前状态](docs/notes/status.md)，历史开发报告从文档目录查阅。
 
 ## 许可与声明
 

@@ -18,10 +18,8 @@ __pycache__/
 # 字体临时工作副本：归档源在 docs/assets/fonts/source，正常提交。
 /tools/fonts/*.ttf
 
-# 可生成的批量预览、历史渲染帧：本地保留，完整备份覆盖。
-# 不忽略 docs/design、docs/assets、docs/verification/device 和其余历史资料。
-/docs/verification/preview/
-/docs/history/releases/
+# docs中的设计、素材源、真机反馈及精选预览正常提交。
+# 批量帧输出至build，历史归档放在backups。
 
 # 完整私有备份：可能含本地配置；保留本地，不提交。
 /backups/
