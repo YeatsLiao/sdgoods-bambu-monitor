@@ -1,0 +1,42 @@
+{
+  "version": "0.3.6",
+  "date": "2026-11-05",
+  "status": "18-skin-polish-software-passed-device-pending",
+  "app": {
+    "fileName": "BambuMonitor.bin",
+    "sizeBytes": 2804624,
+    "sha256": "732156b2f3147f5b7bad65511e7da4374a4fcf5d4a931c1090b814dea8b08d59",
+    "chipName": "ESP32-S3",
+    "chipId": 9,
+    "projectName": "BambuMonitor",
+    "version": "0.3.6",
+    "buildDate": "Nov  5 2026",
+    "buildTime": "22:12:23",
+    "idfVersion": "v5.5.5",
+    "entryAddr": 1077368708
+  },
+  "headroomBytes": 236246,
+  "mergedSha256": "2689e78b17537904d1b5b742a3675317ba438af4b90339a8d3196090ee891e06",
+  "checks": {
+    "baseSkinPages": 144,
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "textDraws": 137775,
+    "truncations": 0,
+    "numberSlashLayouts": 98,
+    "roundInsetPixels": 6,
+    "roundGridAndHtGeometry": "passed",
+    "pickerSleepAndSettings": "passed",
+    "standardBuildMerge": "passed",
+    "deviceFlash": "not-run"
+  },
+  "runtimeLayout": "main/apps/ui_monitor_layout.inc",
+  "feedbackImages": "device/feedback-20261105-polish/",
+  "previews": [
+    "preview/batch-01-zh.png",
+    "preview/batch-02-zh.png",
+    "preview/batch-03-zh.png"
+  ]
+}
