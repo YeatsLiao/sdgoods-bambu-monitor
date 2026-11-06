@@ -6,7 +6,7 @@ import subprocess,os
 ROOT=Path(__file__).resolve().parents[2]
 def main():
     out=ROOT/'build/preview';out.mkdir(parents=True,exist_ok=True)
-    shots=ROOT/'docs/verification/preview';shots.mkdir(parents=True,exist_ok=True)
+    shots=ROOT/'build/preview/frames';shots.mkdir(parents=True,exist_ok=True)
     cc='D:/1.Soft/msys64/mingw64/bin/gcc.exe'
     env=dict(os.environ);env['PATH']=str(Path(cc).parent)+os.pathsep+env.get('PATH','')
     sources=list((ROOT/'components/lvgl/src').rglob('*.c'))

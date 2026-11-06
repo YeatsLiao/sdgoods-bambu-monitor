@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: MIT; package native LVGL framebuffer outputs as PNG. */
 const fs=require('fs'),path=require('path');
 const {PNG}=require(process.argv[2]);
-const root=path.resolve(__dirname,'../../docs/verification/preview');
+const root=path.resolve(__dirname,'../../build/preview/frames');
 for(const name of fs.readdirSync(root).filter(n=>n.endsWith('.ppm'))) {
   const b=fs.readFileSync(path.join(root,name));
   const offset=b.indexOf('255\n')+4;

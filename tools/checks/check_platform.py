@@ -16,7 +16,7 @@ def main():
             digest=sha(p)
             if not up.is_file() or sha(up)!=digest:errors.append(str(relative))
             files.append({'path':relative.as_posix(),'sha256':digest})
-    output=ROOT/'docs/verification/reports/platform-snapshot.json';output.parent.mkdir(parents=True,exist_ok=True)
+    output=ROOT/'docs/notes/platform-snapshot.json';output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps({'reference':str(ref),'matches':not errors,'files':files,'differences':errors},indent=2),encoding='utf-8')
     if errors:raise SystemExit('Platform mismatch: '+', '.join(errors))
     print(f'PASS: {len(files)} official files match the radio project byte for byte.')

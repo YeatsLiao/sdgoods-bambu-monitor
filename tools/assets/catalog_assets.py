@@ -19,7 +19,8 @@ def main():
         hashes[item['sha256']].append(item['path'])
     media={rel(p) for p in (ROOT/'docs').rglob('*') if p.is_file() and p.suffix.lower() in {'.png','.jpg','.jpeg','.ppm','.webp','.gif','.bin'}}
     if media-{i['path'] for i in records}: raise SystemExit('Unindexed media: '+str(sorted(media-{i['path'] for i in records})))
-    markdown=[p for p in (ROOT/'docs').rglob('*.md') if 'releases' not in p.parts]
+    for item in m.get('archivedMedia',[]):hashes[item['sha256']].append('zip:'+item['archive']+'#'+item['path'])
+    markdown=list((ROOT/'docs').rglob('*.md'))
     bodies={rel(p):p.read_text(encoding='utf-8') for p in markdown}
     originals=[]
     for item in m['generatedOriginals']:
@@ -51,7 +52,7 @@ def main():
             source_items.append({'source':'main/assets/'+name,'archiveCopies':hashes[sha(atlas)],
                 'originals':[i['path'] for i in originals if i['sha256']==sha(atlas)]})
         active=('assets/'+p.name in cmake and any(s in ui for s in symbols))
-        runtime.append({'runtime':rel(p),'mirror':'docs/assets/runtime-encoded/'+p.name,'sha256':sha(p),
+        runtime.append({'runtime':rel(p),'canonical':rel(p),'sha256':sha(p),
             'symbols':symbols,'sources':source_items,'encoder':'tools/assets/'+script,
             'status':'referenced-by-current-ui' if active else 'retained-legacy-not-referenced-by-current-ui'})
     names=re.findall(r'\{"([^"\n]+)","([^"\n]+)",0x',(ROOT/'main/apps/monitor_skin.c').read_text(encoding='utf-8'))
@@ -60,7 +61,7 @@ def main():
     for i,name in enumerate(('farm','cyber','ocean','snow','desert','magic'),13): art[i]=['art_'+name+'.c']
     skins=[]
     for i,(zh,en) in enumerate(names,1):
-        batch=(i-1)//6+1; folder=ROOT/f'docs/design/batch-{batch:02d}'
+        batch=(i-1)//6+1; folder=ROOT/f'docs/design/stage-{batch:02d}'
         refs=json.loads((folder/'manifest.json').read_text(encoding='utf-8'))
         skins.append({'id':i,'zh':zh,'en':en,'spec':rel(folder/'SPEC.md'),
             'references':[{**p,'file':rel(folder/p['file']),'sourceOriginal':rel((folder/p['sourceOriginal']).resolve())} for p in refs['pages']],
@@ -70,7 +71,7 @@ def main():
             'decorationNote':'Bamboo header ornament is native geometry in b2_bamboo; old generated bamboo retained.' if i==10 else '',
             'accessoryReferenceStatus':refs.get('accessoriesStatus','see-current-four-page-spec')})
     result={'schema':1,'version':(ROOT/'version.txt').read_text().strip(),'generatedOriginals':originals,
-        'runtimeAssets':runtime,'skins':skins,'fonts':{'source':'docs/assets/fonts/source','generated':'docs/assets/fonts/generated',
+        'runtimeAssets':runtime,'skins':skins,'fonts':{'source':'docs/assets/fonts','generated':'main/fonts',
         'license':'main/fonts/OFL.txt','generator':'tools/assets/generate_fonts.py'},
         'duplicates':[{'sha256':key,'copies':sorted(value),'policy':'retain-all'} for key,value in sorted(hashes.items()) if len(value)>1],
         'counts':{'originals':len(originals),'runtimeAssets':len(runtime),'skins':len(skins),'indexedMediaAndResources':len(records)}}

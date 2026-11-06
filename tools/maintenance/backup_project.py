@@ -10,7 +10,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
-SKIP = {'.git', 'backups', 'node_modules', '__pycache__', 'managed_components'}
+SKIP = {'.git', 'node_modules', '__pycache__', 'managed_components'}
 
 def digest(path):
     with path.open('rb') as f:
@@ -44,6 +44,7 @@ def main():
         if not f.is_file(): continue
         rel = f.relative_to(ROOT)
         if any(part in SKIP for part in rel.parts): continue
+        if rel.parts[0]=='backups' and rel.parts[:2]!=('backups','history-outputs'): continue
         if rel.parts[0].startswith('build'):
             if rel.parts[0] != 'build': continue
             keep = len(rel.parts) == 2 and f.suffix in {'.bin','.elf','.map','.json'}
@@ -53,8 +54,8 @@ def main():
         files.append(f)
     manifest = {'created': stamp, 'timezone':'Asia/Shanghai',
         'version': (ROOT/'version.txt').read_text().strip(),
-        'scope':'All source, dependencies, docs (including ignored history/previews), local config, dist and selected flash outputs/logs.',
-        'excluded':sorted(SKIP)+['rebuildable build caches'],
+        'scope':'All source, dependencies, compact docs, private history-outputs ZIP payloads, local config, dist and selected flash outputs/logs.',
+        'excluded':sorted(SKIP)+['rebuildable build caches','other complete backups and temporary backup files'],
         'private': True, 'files': []}
     with zipfile.ZipFile(target, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=1, allowZip64=True) as z:
         for i,f in enumerate(files):

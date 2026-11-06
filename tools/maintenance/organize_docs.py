@@ -18,6 +18,8 @@ def checked(p):
     return p
 
 def main():
+    if (ROOT/'docs/notes/migration.json').exists():
+        raise SystemExit('Legacy migration already superseded; use tools/checks/check_docs.py --archives')
     ledger = HISTORY / 'migration-20261105.json'
     if ledger.exists():
         raise SystemExit('Migration already recorded; use tools/checks/check_docs.py to verify.')

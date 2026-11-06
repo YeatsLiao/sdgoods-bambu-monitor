@@ -1,99 +1,53 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-"""Preserve generated originals and release previews, with a verifiable docs index."""
+"""Preserve image/font sources and index local plus privately archived media."""
 from pathlib import Path
-import argparse,hashlib,json,shutil
-ROOT=Path(__file__).resolve().parents[2]
+import argparse,json,shutil
+from archive_store import ROOT,digest,entries,archive_files
 IMAGE_TYPES={'.png','.jpg','.jpeg','.webp','.gif','.ppm'}
-LABELS={
-    'exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png':'竹林装饰填色透明竹叶精修',
-    'exec-f173ffde-bf80-4221-8a0c-6c6b9ae78d99.png':'第三批最初原型还原用六大场景 v2',
-    'exec-6ca75823-f37f-4268-9b00-cc23fd33d6fe.png':'第三批角色横幅初稿 v1',
-    'exec-46c51f3b-96cb-480b-8428-7045ae480725.png':'第三批角色内收横幅 v2',
-    'exec-21d1d29f-3333-437d-bb33-282abd675760.png':'第二批按最初原型还原的透明六格场景/头像 v2',
-    'exec-1bd82f61-cd98-40ed-ad32-a98e9d3a0484.png':'纸感标签低对比背景纹理 v1',
-    'exec-ba31c048-6e7b-4d08-9977-d59123a57a8f.png':'猫咪监工探头透明素材 v1',
-    'exec-bf89db1e-8d1d-4f7d-89ac-5756e402d7f1.png':'第一批 AMS 页四页结构修订',
-    'exec-b3757a5d-f4a9-497a-93fe-daffd3735183.png':'第一批第四页打印详情修订',
-    'exec-f6fc4c09-0921-46fd-9eb7-1190427ea7d6.png':'第一批首页概念（01–06）',
-    'exec-0bf26a6a-eef7-4909-9138-5aa9962393da.png':'第二批首页概念（07–12）',
-    'exec-5765f9f1-f23b-43d8-86de-103b72c4538d.png':'第三批首页概念（13–18）',
-    'exec-215d53d9-6bd4-4675-b454-2b24f5e75f7b.png':'第一批 AMS 页概念',
-    'exec-8383f46d-a00e-4f21-bbc8-d864e37f3af8.png':'第一批详情页概念',
-    'exec-72c6bf30-c7e9-4de2-8549-e908edc0f4b9.png':'第二批 AMS 页概念',
-    'exec-42b3d834-f3fc-4467-87bc-ec4ebfb045c9.png':'第二批详情页概念',
-    'exec-18ccb08f-8a2d-4b72-9d55-dc3e0577aacd.png':'第三批 AMS 页概念',
-    'exec-b25ebe07-fa04-4b8a-b7d3-a3da170ebc24.png':'第三批详情页概念',
-    'exec-15b06b96-fd0c-4e71-8aeb-9f5258cb908f.png':'共享设置四屏概念',
-    'exec-dee86937-053d-4e52-8631-0b524f5e3eae.png':'第一批三场景插画源图',
-    'exec-17ce3410-eb81-4e47-aae4-8aeaa82b4735.png':'第二批四场景插画源图',
-    'exec-18cdbfc2-de83-4efa-8c62-e639da80b492.png':'第三批六场景插画源图',
-    'exec-2a4dafe9-5f36-4888-8931-37f9e0973e41.png':'第一批原型还原用三场景透明插画 v2',
-    'exec-2025fdb4-40ea-4732-81bc-0073679c7322.png':'第一批第三页外置料架与 AMS HT 概念 v1',
-}
-def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-def preserve(src,dst):
+TARGET=ROOT/'docs/assets';IMAGES=TARGET/'images'
+def copy(src,dst,original=False):
     dst.parent.mkdir(parents=True,exist_ok=True)
+    if src.resolve()==dst.resolve():return dst
     if dst.exists() and digest(src)!=digest(dst):
-        dst=dst.with_name(dst.stem+'-'+digest(src)[:12]+dst.suffix)
-    if not dst.exists():shutil.copy2(src,dst)
-    if digest(src)!=digest(dst):raise RuntimeError(f'Archive mismatch: {dst}')
-    return dst
-def mirror_current(src,dst):
-    """Keep the plain filename current, and preserve outgoing bytes in history."""
-    if dst.exists() and digest(src)!=digest(dst):
-        archived=ROOT/'docs/history/assets'/dst.relative_to(ROOT/'docs/assets')
-        preserve(dst,archived.with_name(archived.stem+'-'+digest(dst)[:12]+archived.suffix))
-    dst.parent.mkdir(parents=True,exist_ok=True)
+        if original:dst=dst.with_name(dst.stem+'-'+digest(src)[:12]+dst.suffix)
+        else:archive_files([dst],'replaced-source','replaced-source')
     if not dst.exists() or digest(src)!=digest(dst):shutil.copy2(src,dst)
-    if digest(src)!=digest(dst):raise RuntimeError(f'Current mirror mismatch: {dst}')
+    if digest(src)!=digest(dst):raise RuntimeError('Source copy mismatch: '+str(dst))
+    return dst
 
 def main():
-    parser=argparse.ArgumentParser()
-    parser.add_argument('--source',required=True,help='This chat generated_images directory')
-    parser.add_argument('--snapshot',help='Immutable software-preview tag under docs/history/releases')
-    args=parser.parse_args();source=Path(args.source)
-    if not source.is_dir():raise SystemExit('Generated image source not found')
-    generated=[]
+    parser=argparse.ArgumentParser();parser.add_argument('--source',type=Path,default=IMAGES)
+    parser.add_argument('--snapshot',help='Archive build/preview/frames with this tag')
+    args=parser.parse_args();source=args.source.resolve()
+    if not source.is_dir():raise SystemExit('Source directory not found: '+str(source))
+    manifest=TARGET/'image-manifest.json';old=json.loads(manifest.read_text(encoding='utf-8')) if manifest.exists() else {}
+    originals={i['path']:i for i in old.get('generatedOriginals',[])}
     for src in sorted(source.iterdir()):
-        if src.is_file() and src.suffix.lower() in IMAGE_TYPES:
-            dst=preserve(src,ROOT/'docs/assets/generated-originals'/src.name)
-            generated.append({'title':LABELS.get(src.name,'其他生成原图'),'originalName':src.name,'path':dst.relative_to(ROOT).as_posix(),'bytes':src.stat().st_size,'sha256':digest(src)})
-    for src in sorted((ROOT/'main/assets').iterdir()):
-        if src.suffix.lower() in IMAGE_TYPES:preserve(src,ROOT/'docs/assets/atlases'/src.name)
-        elif src.suffix=='.c':mirror_current(src,ROOT/'docs/assets/runtime-encoded'/src.name)
-    for src in sorted((ROOT/'main/fonts').iterdir()):
-        if src.is_file():mirror_current(src,ROOT/'docs/assets/fonts/generated'/src.name)
-    for src in sorted((ROOT/'tools/fonts').iterdir()):
-        if src.is_file():mirror_current(src,ROOT/'docs/assets/fonts/source'/src.name)
+        if not src.is_file() or src.suffix.lower() not in IMAGE_TYPES:continue
+        dst=copy(src,IMAGES/src.name,original=True);key=dst.relative_to(ROOT).as_posix()
+        if key in originals or src.name.startswith('exec-') or source!=IMAGES.resolve():
+            originals[key]={'title':originals.get(key,{}).get('title','生成原图'),'originalName':src.name,'path':key,'bytes':dst.stat().st_size,'sha256':digest(dst)}
+    for src in (ROOT/'main/assets').glob('*.png'):copy(src,IMAGES/src.name)
+    for src in (ROOT/'tools/fonts').iterdir():
+        if src.is_file() and src.suffix.lower() in {'.ttf','.otf'}:copy(src,TARGET/'fonts'/src.name)
+    copy(ROOT/'main/fonts/OFL.txt',TARGET/'fonts/OFL.txt')
     if args.snapshot:
-        if '..' in args.snapshot or not args.snapshot.replace('-','').replace('_','').replace('.','').isalnum():raise SystemExit('Invalid snapshot tag')
-        for src in sorted((ROOT/'docs/verification/preview').iterdir()):
-            if src.is_file() and src.suffix.lower() in IMAGE_TYPES:preserve(src,ROOT/'docs/history/releases'/args.snapshot/src.name)
+        frames=ROOT/'build/preview/frames'
+        if not frames.is_dir():raise SystemExit('Run tools/preview/render_preview.py first')
+        archive_files(list(frames.iterdir()),args.snapshot,'software-rendering')
     images=[];resources=[]
-    for src in sorted((ROOT/'docs').rglob('*')):
-        if not src.is_file():continue
-        item={'path':src.relative_to(ROOT).as_posix(),'bytes':src.stat().st_size,'sha256':digest(src)}
-        if src.suffix.lower() in IMAGE_TYPES:images.append(item)
-        elif src.suffix.lower()=='.bin' or src.is_relative_to(ROOT/'docs/assets/runtime-encoded') or src.is_relative_to(ROOT/'docs/assets/fonts') or src.is_relative_to(ROOT/'docs/history/assets'):resources.append(item)
-    old_manifest=ROOT/'docs/assets/image-manifest.json'
-    previous=json.loads(old_manifest.read_text(encoding='utf-8')) if old_manifest.exists() else {}
-    origin=previous.get('originalGenerationCache',previous.get('generatedSource'))
-    if source.resolve()!=(ROOT/'docs/assets/generated-originals').resolve():origin=str(source.resolve())
-    manifest={'generatedSource':str(source.resolve()),'originalGenerationCache':origin,'generatedOriginals':generated,'images':images,'resources':resources,'generatedCount':len(generated),'docsImageCount':len(images),'allGeneratedBytesVerified':True}
-    target=ROOT/'docs/assets'
-    (target/'image-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
-    lines=['# 素材入口','', '按皮肤查原图、图集和编码请从 [素材导航](CATALOG.md) 进入。','', '**当前原型只看 [第一批基准](../design/batch-01/README.md)**。这里保存源素材和资源副本，不能把软件截图或临时角色认作已批准原型。','',
-        '- [generated-originals](generated-originals/)：全部生成原图，保留原名与源字节。',
-        '- [atlases](atlases/)：独立插画源图，不包含实时数据。',
-        '- [runtime-encoded](runtime-encoded/)：与 main/assets 对应的当前编码副本；未通过视觉验收的候选同样会归档，归档不等于批准。',
-        '- [fonts](fonts/)：字体源、当前生成物与许可。',
-        '- [references](references/)：用户反馈和外部项目参考。',
-        '- [旧资源](../history/assets/)：被替换的编码/字体按哈希保留。',
-        '- [保存规则](GENERATION.md) · [完整机器清单](image-manifest.json)','',
-        f'已校验生成原图 {len(generated)} 张；全部 docs 图片 {len(images)} 个文件（包含历史副本与软件帧，不是当前原型数量）。','',
-        '## 生成原图追溯','']
-    for item in generated:lines.append(f"- {item['title']}：[原文件](generated-originals/{item['originalName']})")
-    (target/'README.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    print(f'PASS: {len(generated)} originals; {len(images)} image files; current mirrors synchronized; snapshot={args.snapshot or "none"}.')
+    for p in sorted((ROOT/'docs').rglob('*')):
+        if not p.is_file():continue
+        item={'path':p.relative_to(ROOT).as_posix(),'bytes':p.stat().st_size,'sha256':digest(p)}
+        if p.suffix.lower() in IMAGE_TYPES:images.append(item)
+        elif p.is_relative_to(TARGET/'fonts'):resources.append(item)
+    for folder in ('main/assets','main/fonts'):
+        for p in sorted((ROOT/folder).iterdir()):
+            if p.is_file() and p.suffix in {'.c','.txt'}:resources.append({'path':p.relative_to(ROOT).as_posix(),'bytes':p.stat().st_size,'sha256':digest(p)})
+    archived=[{'archive':e['archive'],'path':e['path'],'bytes':e['bytes'],'sha256':e['sha256']} for e in entries() if Path(e['path']).suffix.lower() in IMAGE_TYPES|{'.c','.ttf','.otf','.bin'}]
+    result={'schema':2,'generatedSource':str(IMAGES),'originalGenerationCache':old.get('originalGenerationCache'),
+        'generatedOriginals':list(originals.values()),'generatedCount':len(originals),'images':images,'resources':resources,
+        'archivedMedia':archived,'archiveIndex':'docs/notes/archive-index.json','docsImageCount':len(images),'allGeneratedBytesVerified':True}
+    manifest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(f'PASS: {len(originals)} originals; {len(images)} local pictures; {len(archived)} archived media records; canonical runtime resources indexed.')
 if __name__=='__main__':main()

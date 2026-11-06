@@ -15,7 +15,7 @@ def main():
     args=parser.parse_args()
     sys.path.insert(0,str(Path(args.idf)/'components/partition_table'))
     from gen_esp32part import PartitionTable
-    folder=ROOT/'docs/verification/device'/(args.port+'-'+datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
+    folder=ROOT/'backups/device-probes'/(args.port+'-'+datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
     folder.mkdir(parents=True,exist_ok=True)
     chip=esptool.detect_chip(port=args.port,baud=115200)
     loader=chip
