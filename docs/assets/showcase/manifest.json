@@ -1,0 +1,124 @@
+{
+  "version": "0.3.9",
+  "sourceType": "native-LVGL-software-rendering-with-sample-data",
+  "sourceDirectory": "docs/verification/preview",
+  "homepageSkinIds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "files": [
+    {
+      "file": "first-six-skins.png",
+      "sha256": "870af56bca44db0d3dbbf0fe7ec8bca31fd552377f780dc9e86a70d6ad2c42f5",
+      "size": [
+        1080,
+        720
+      ],
+      "sources": [
+        "skin-01-page-1-zh.png",
+        "skin-02-page-1-zh.png",
+        "skin-03-page-1-zh.png",
+        "skin-04-page-1-zh.png",
+        "skin-05-page-1-zh.png",
+        "skin-06-page-1-zh.png"
+      ]
+    },
+    {
+      "file": "second-six-skins.png",
+      "sha256": "b553525318431edc33158ce33be4edcbb8572041deb908ee1fb64f7aefa0fe1f",
+      "size": [
+        1080,
+        720
+      ],
+      "sources": [
+        "skin-07-page-1-zh.png",
+        "skin-08-page-1-zh.png",
+        "skin-09-page-1-zh.png",
+        "skin-10-page-1-zh.png",
+        "skin-11-page-1-zh.png",
+        "skin-12-page-1-zh.png"
+      ]
+    },
+    {
+      "file": "third-six-skins.png",
+      "sha256": "4f6f1aa3d4dba8b2fd498a9f3717d0a0c55ec5ecb8275e7f2a3a73c1ef229151",
+      "size": [
+        1080,
+        720
+      ],
+      "sources": [
+        "skin-13-page-1-zh.png",
+        "skin-14-page-1-zh.png",
+        "skin-15-page-1-zh.png",
+        "skin-16-page-1-zh.png",
+        "skin-17-page-1-zh.png",
+        "skin-18-page-1-zh.png"
+      ]
+    },
+    {
+      "file": "settings-six-pages.png",
+      "sha256": "6f73a079c59cf530385f1ff9b12e8343edc6e2f41942ca0cfa280d657e1701fc",
+      "size": [
+        1080,
+        720
+      ],
+      "sources": [
+        "settings-1.png",
+        "settings-2.png",
+        "settings-3.png",
+        "settings-4.png",
+        "settings-provisioning.png",
+        "skin-picker-01-zh.png"
+      ]
+    },
+    {
+      "file": "skins-01-06-all-pages.png",
+      "sha256": "0d9ce53ad3880301f32aedaed7c6b4cf6c08a650ed15535780b5cb04c8389e93",
+      "size": [
+        2160,
+        1440
+      ],
+      "sources": [
+        "batch-01-zh.png"
+      ]
+    },
+    {
+      "file": "skins-07-12-all-pages.png",
+      "sha256": "5c5825855b0a333d2c3db99e6f5267068851665fe188755c2624b3758c45d2b5",
+      "size": [
+        2160,
+        1440
+      ],
+      "sources": [
+        "batch-02-zh.png"
+      ]
+    },
+    {
+      "file": "skins-13-18-all-pages.png",
+      "sha256": "fc346256c2c60018a7bd5125e415ebb7770bbbe9a475dfe58c4020d9381aeab6",
+      "size": [
+        2160,
+        1440
+      ],
+      "sources": [
+        "batch-03-zh.png"
+      ]
+    }
+  ]
+}

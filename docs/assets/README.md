@@ -1,5 +1,7 @@
 # 素材入口
 
+按皮肤查原图、图集和编码请从 [素材导航](CATALOG.md) 进入。
+
 **当前原型只看 [第一批基准](../design/batch-01/README.md)**。这里保存源素材和资源副本，不能把软件截图或临时角色认作已批准原型。
 
 - [generated-originals](generated-originals/)：全部生成原图，保留原名与源字节。
@@ -10,7 +12,7 @@
 - [旧资源](../history/assets/)：被替换的编码/字体按哈希保留。
 - [保存规则](GENERATION.md) · [完整机器清单](image-manifest.json)
 
-已校验生成原图 23 张；全部 docs 图片 4725 个文件（包含历史副本与软件帧，不是当前原型数量）。
+已校验生成原图 24 张；全部 docs 图片 7082 个文件（包含历史副本与软件帧，不是当前原型数量）。
 
 ## 生成原图追溯
 
@@ -32,6 +34,7 @@
 - 第一批详情页概念：[原文件](generated-originals/exec-8383f46d-a00e-4f21-bbc8-d864e37f3af8.png)
 - 第三批详情页概念：[原文件](generated-originals/exec-b25ebe07-fa04-4b8a-b7d3-a3da170ebc24.png)
 - 第一批第四页打印详情修订：[原文件](generated-originals/exec-b3757a5d-f4a9-497a-93fe-daffd3735183.png)
+- 竹林装饰填色透明竹叶精修：[原文件](generated-originals/exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png)
 - 猫咪监工探头透明素材 v1：[原文件](generated-originals/exec-ba31c048-6e7b-4d08-9977-d59123a57a8f.png)
 - 第一批 AMS 页四页结构修订：[原文件](generated-originals/exec-bf89db1e-8d1d-4f7d-89ac-5756e402d7f1.png)
 - 第一批三场景插画源图：[原文件](generated-originals/exec-dee86937-053d-4e52-8631-0b524f5e3eae.png)
