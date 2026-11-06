@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ * Adapted from ai-passport-bambu-monitor; see docs/notes/architecture.md.
  */
 #pragma once
 #include "bambu_state.h"

@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ * Adapted from ai-passport-bambu-monitor; see docs/notes/architecture.md.
  */
 // main/bambu_state.h —— 拓竹打印机状态数据结构
 #pragma once

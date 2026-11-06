@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ * Adapted from ai-passport-bambu-monitor; see docs/notes/architecture.md.
  */
 // main/bambu_mqtt.h —— 拓竹打印机 MQTT-TLS 客户端
 #pragma once

@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ * Adapted from ai-passport-bambu-monitor; see docs/notes/architecture.md.
  */
 // main/wifi_prov.h —— 配网模式 (SoftAP 热点 + 网页表单)
 //

@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: MIT
- * Adapted from ai-passport-bambu-monitor; see docs/architecture/upstream.md.
+ * Adapted from ai-passport-bambu-monitor; see docs/notes/architecture.md.
  */
 // Small-memory report reader: validate the wire document, then decode only the
 // requested scalars and individual tray objects. No full cJSON report tree.
