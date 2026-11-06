@@ -374,22 +374,32 @@ static bool fans(const char *print) {
 // Model identifiers come from Studio machine profiles. Never infer a printer
 // from an AMS module, firmware number, or an unverified serial prefix.
 static bool model_name(const char *value) {
-    char raw[64];
+    char raw[64], key[64];
     if (!text(value, raw, sizeof(raw))) return false;
-    const char *name = raw;
-    if (!strncmp(name, "Bambu Lab ", 10)) name += 10;
-    if (!strcmp(name, "BL-P001") || !strcmp(name, "X1 Carbon")) name = "X1C";
-    else if (!strcmp(name, "O1D")) name = "H2D";
-    else if (!strcmp(name, "BL-P002")) name = "X1";
-    else if (!strcmp(name, "C11")) name = "P1P";
-    else if (!strcmp(name, "C12")) name = "P1S";
-    else if (!strcmp(name, "C13")) name = "X1E";
-    else if (!strcmp(name, "N2S")) name = "A1";
-    else if (!strcmp(name, "N1")) name = "A1 mini";
-    const char *known[] = {"X1C", "X1", "X1E", "P1P", "P1S", "A1", "A1 mini", "H2D", "H2S", "H2C", "H2D Pro", "X2D"};
-    for (unsigned i = 0; i < sizeof(known) / sizeof(known[0]); ++i) {
-        if (!strcmp(name, known[i])) {
-            strcpy(s_next.printer_model, name);
+    size_t n = 0;
+    for (const unsigned char *p = (const unsigned char *)raw; *p; ++p) {
+        if (*p == ' ' || *p == '-' || *p == '_' || *p == '\t') continue;
+        if (!((*p >= 'a' && *p <= 'z') || (*p >= 'A' && *p <= 'Z') || (*p >= '0' && *p <= '9'))) return false;
+        key[n++] = *p >= 'A' && *p <= 'Z' ? *p + ('a' - 'A') : *p;
+    }
+    key[n] = 0;
+    const char *name = !strncmp(key, "bambulab", 8) ? key + 8 : key;
+    if (!strcmp(name, "x1carbon")) name = "x1c";
+    // Exact matches only: A1 mini/H2D Pro must not collapse to A1/H2D.
+    // Codes are from BambuStudio's machine_model profiles, not board revisions.
+    static const struct { const char *key, *code, *display; } models[] = {
+        {"x1c", "blp001", "X1C"}, {"x1", "blp002", "X1"},
+        {"x1e", "c13", "X1E"}, {"p1p", "c11", "P1P"},
+        {"p1s", "c12", "P1S"}, {"p2s", "n7", "P2S"},
+        {"a1", "n2s", "A1"}, {"a1mini", "n1", "A1 mini"},
+        {"h2d", "o1d", "H2D"}, {"h2dpro", "o1e", "H2D Pro"},
+        {"h2s", "o1s", "H2S"}, {"h2c", "o1c2", "H2C"},
+        {"x2d", "n6", "X2D"}, {"a2l", "n9", "A2L"},
+        {"h3c", "", "H3C"}, // Official list has a name; no verified code yet.
+    };
+    for (unsigned i = 0; i < sizeof(models) / sizeof(models[0]); ++i) {
+        if (!strcmp(name, models[i].key) || (models[i].code[0] && !strcmp(name, models[i].code))) {
+            strcpy(s_next.printer_model, models[i].display);
             return true;
         }
     }

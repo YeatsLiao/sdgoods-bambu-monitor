@@ -7,7 +7,8 @@
 #include <stdint.h>
 
 // Validate a complete report without allocating a full JSON tree, merge a delta,
-// then publish a coherent snapshot. False leaves the previous state untouched.
+// then publish a coherent snapshot. Return true only for valid telemetry;
+// identity-only replies may update printer_model while returning false.
 bool bambu_report_apply(const char *json, size_t length, uint32_t now_ms);
 // Provisioning runs with the monitor stopped. Validate without publishing state.
 bool bambu_report_validate(const char *json, size_t length);

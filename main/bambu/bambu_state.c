@@ -35,6 +35,12 @@ void bambu_state_copy(bambu_state_t *out) {
     STATE_UNLOCK();
 }
 
+void bambu_state_model_copy(char out[24]) {
+    STATE_LOCK();
+    memcpy(out, g_bambu_state.printer_model, sizeof(g_bambu_state.printer_model));
+    STATE_UNLOCK();
+}
+
 void bambu_state_begin_connection(void) {
     STATE_LOCK();
     bambu_state_reset(&g_bambu_state);

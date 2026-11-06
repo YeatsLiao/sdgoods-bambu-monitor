@@ -55,6 +55,8 @@ static bool s_wifi_started = false;
 static bool s_wifi_initialized, s_enabled;
 static volatile bool s_have_ip, s_linked;
 static volatile bool s_report_received;
+static volatile bool s_subscribed;
+static volatile uint32_t s_identity_generation;
 static int64_t s_next_attempt;
 static char s_topic_report[96];
 static char s_topic_request[96];
@@ -175,9 +177,15 @@ static bool rx_buf_reserve(size_t need) {
 
 // 收到一条完整 report (json 已 NUL 结尾) → 解析并更新状态
 static void mqtt_process_report(char *json, int len) {
-    if (bambu_report_apply(json, (size_t)len, (uint32_t)(esp_timer_get_time() / 1000)))
+    char before[24], after[24];
+    bambu_state_model_copy(before);
+    bool telemetry = bambu_report_apply(json, (size_t)len, (uint32_t)(esp_timer_get_time() / 1000));
+    if (telemetry)
         s_report_received = true;
-    else if (warn_ratelimit())
+    bambu_state_model_copy(after);
+    if (strcmp(before, after))
+        ESP_LOGI(TAG, "Printer model identified: %s", after);
+    else if (!telemetry && !strstr(json, "\"get_version\"") && warn_ratelimit())
         ESP_LOGW(TAG, "Report ignored: malformed JSON or no supported valid fields (%d bytes)", len);
 }
 
@@ -190,6 +198,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
         case MQTT_EVENT_CONNECTED:
             if (!s_enabled) break;
             s_linked = true;
+            s_subscribed = false;
             s_report_received = false;
             bambu_state_begin_connection();
             ESP_LOGI(TAG, "MQTT 已连接");
@@ -201,13 +210,13 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
 
         case MQTT_EVENT_SUBSCRIBED:
             bambu_mqtt_pushall();
-            if (s_enabled && s_linked && s_mqtt_client)
-                esp_mqtt_client_publish(s_mqtt_client,s_topic_request,
-                    "{\"info\":{\"sequence_id\":\"1\",\"command\":\"get_version\"}}",0,0,0);
+            ++s_identity_generation;
+            s_subscribed = true;
             break;
 
         case MQTT_EVENT_DISCONNECTED:
             s_linked = false;
+            s_subscribed = false;
             s_rx_total = s_rx_len = 0;
             s_rx_overflow = false;
             ESP_LOGW(TAG, "MQTT 断开");
@@ -364,6 +373,10 @@ esp_err_t bambu_mqtt_start(void) {
 }
 
 void bambu_mqtt_poll(void) {
+    // Only this worker owns attempt/deadline state. MQTT callbacks announce a
+    // new subscription generation, so reconnects always get a fresh query budget.
+    static uint32_t generation, next_query_ms;
+    static unsigned attempts;
     if (!s_enabled || esp_timer_get_time() < s_next_attempt) return;
     s_next_attempt = esp_timer_get_time() + 2000000;
     if (!s_have_ip) {
@@ -372,10 +385,29 @@ void bambu_mqtt_poll(void) {
     }
     // Once created, esp-mqtt owns its normal reconnect policy.
     if (!s_mqtt_client) mqtt_connect();
+    if (s_linked && s_subscribed && s_mqtt_client) {
+        uint32_t current_generation = s_identity_generation;
+        uint32_t now_ms = (uint32_t)(esp_timer_get_time() / 1000);
+        if (generation != current_generation) {
+            generation = current_generation;
+            attempts = 0;
+            next_query_ms = now_ms;
+        }
+        char model[24];
+        bambu_state_model_copy(model);
+        if (!model[0] && attempts < 3 && (int32_t)(now_ms - next_query_ms) >= 0) {
+            ++attempts;
+            next_query_ms = now_ms + 6000;
+            int id = esp_mqtt_client_publish(s_mqtt_client, s_topic_request,
+                "{\"info\":{\"sequence_id\":\"1\",\"command\":\"get_version\"}}", 0, 0, 0);
+            ESP_LOGI(TAG, "Printer model query %u/3: %s", attempts, id >= 0 ? "sent" : "failed");
+        }
+    }
 }
 
 void bambu_mqtt_stop(void) {
     s_enabled = false;
+    s_subscribed = false;
     s_have_ip = s_linked = false;
     if (s_mqtt_client) {
         esp_mqtt_client_stop(s_mqtt_client);

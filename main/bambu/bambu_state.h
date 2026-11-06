@@ -120,6 +120,7 @@ void bambu_state_init(void);
 void bambu_state_begin_connection(void);
 void bambu_state_reset(bambu_state_t *st);
 void bambu_state_copy(bambu_state_t *out);
+void bambu_state_model_copy(char out[24]);
 void bambu_state_commit(const bambu_state_t *state);
 void bambu_state_project(bambu_state_t *state, int unit_index);
 bool bambu_state_fresh(const bambu_state_t *state, uint32_t now_ms);
