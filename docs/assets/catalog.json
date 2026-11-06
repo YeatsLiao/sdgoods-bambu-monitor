@@ -449,7 +449,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -471,7 +471,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_art.cjs",
+      "encoder": "tools/assets/encode_art.cjs",
       "status": "retained-legacy-not-referenced-by-current-ui"
     },
     {
@@ -504,7 +504,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -537,7 +537,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -570,7 +570,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -592,7 +592,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -625,7 +625,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -647,7 +647,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_art.cjs",
+      "encoder": "tools/assets/encode_art.cjs",
       "status": "retained-legacy-not-referenced-by-current-ui"
     },
     {
@@ -680,7 +680,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -702,7 +702,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_art.cjs",
+      "encoder": "tools/assets/encode_art.cjs",
       "status": "retained-legacy-not-referenced-by-current-ui"
     },
     {
@@ -724,7 +724,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -757,7 +757,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch3.cjs",
+      "encoder": "tools/assets/encode_batch3.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -779,7 +779,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -801,7 +801,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -823,7 +823,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_bamboo.cjs",
+      "encoder": "tools/assets/encode_bamboo.cjs",
       "status": "retained-legacy-not-referenced-by-current-ui"
     },
     {
@@ -845,7 +845,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_cat.cjs",
+      "encoder": "tools/assets/encode_cat.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -867,7 +867,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -889,7 +889,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_batch2.cjs",
+      "encoder": "tools/assets/encode_batch2.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -911,7 +911,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_scenes.cjs",
+      "encoder": "tools/assets/encode_scenes.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -933,7 +933,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_scenes.cjs",
+      "encoder": "tools/assets/encode_scenes.cjs",
       "status": "referenced-by-current-ui"
     },
     {
@@ -955,7 +955,7 @@
           ]
         }
       ],
-      "encoder": "tools/encode_scenes.cjs",
+      "encoder": "tools/assets/encode_scenes.cjs",
       "status": "referenced-by-current-ui"
     }
   ],
@@ -1734,7 +1734,7 @@
     "source": "docs/assets/fonts/source",
     "generated": "docs/assets/fonts/generated",
     "license": "main/fonts/OFL.txt",
-    "generator": "tools/generate_fonts.py"
+    "generator": "tools/assets/generate_fonts.py"
   },
   "duplicates": [
     {
@@ -2965,6 +2965,14 @@
         "docs/history/releases/second-batch-0.3.4/skin-picker-08-en.png",
         "docs/history/releases/third-batch-0.3.5/skin-picker-08-en.png",
         "docs/history/releases/ui-polish-0.3.6/skin-picker-08-en.png"
+      ],
+      "policy": "retain-all"
+    },
+    {
+      "sha256": "1217dc53a238f6abd5565555be0ec079cbdecca8ce26430ee288803278c2e20a",
+      "copies": [
+        "docs/assets/fonts/source/README.md",
+        "docs/history/assets/fonts/source/README-70e25b5cdf6f.md"
       ],
       "policy": "retain-all"
     },
@@ -8552,14 +8560,6 @@
       "policy": "retain-all"
     },
     {
-      "sha256": "70e25b5cdf6f48d9b750b5160a42da6be8121f901832babd3f7660945cc89f2d",
-      "copies": [
-        "docs/assets/fonts/source/README.md",
-        "docs/history/assets/fonts/source/README-70e25b5cdf6f.md"
-      ],
-      "policy": "retain-all"
-    },
-    {
       "sha256": "71172cbc7a2c8f25657465df4ee809b870f61d7de8b0ab145fbf072b389201b3",
       "copies": [
         "docs/history/releases/ui-polish-0.3.6/audit-17-offline-material-2-zh.ppm",
@@ -11240,6 +11240,14 @@
       "copies": [
         "docs/history/releases/ui-polish-0.3.6/edge-18-ht-unknown-zh.ppm",
         "docs/verification/preview/edge-18-ht-unknown-zh.ppm"
+      ],
+      "policy": "retain-all"
+    },
+    {
+      "sha256": "9a7cd6675f04bdbf2218fce86ed7a861bd0b1af3059425c2c31180190980ff3c",
+      "copies": [
+        "docs/history/releases/firmware/BambuMonitor_app.bin",
+        "docs/history/releases/firmware/releases/v0.3.9/BambuMonitor_app.bin"
       ],
       "policy": "retain-all"
     },
@@ -14419,6 +14427,14 @@
       "policy": "retain-all"
     },
     {
+      "sha256": "cffaa757221e65822fe3689fc21f891066c841d59299988a89586b84c6fc6f37",
+      "copies": [
+        "docs/history/releases/firmware/additional-exports/BambuMonitor_app-cffaa757221e.bin",
+        "docs/history/releases/firmware/recovered-build/BambuMonitor-cffaa757221e.bin"
+      ],
+      "policy": "retain-all"
+    },
+    {
       "sha256": "cffe54c9344564a544e59bb2ef77fea3293c79045ec9299420ba5e3b7cec7d7e",
       "copies": [
         "docs/history/releases/ui-polish-0.3.6/skin-17-ams-ht.ppm",
@@ -17306,6 +17322,6 @@
     "originals": 24,
     "runtimeAssets": 21,
     "skins": 18,
-    "indexedMediaAndResources": 7160
+    "indexedMediaAndResources": 7182
   }
 }

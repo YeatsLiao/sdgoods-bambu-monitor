@@ -1,6 +1,6 @@
 # 竹叶素材与提示词：0.3.6
 
-工具：内置 ImageGen。参考第二组最初 AMS 原型中的竹林装饰。生成原图 exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png 保留在 generated-originals；工程源 main/assets/bamboo-leaf-v1.png，归档源在 docs/assets/atlases。tools/encode_bamboo.cjs 等比编码为64×64 RGB565+alpha（12,288字节）。运行由统一装饰盒按比例绘制，取代交叉直线搭成的竹架图，不修改整张原型。
+工具：内置 ImageGen。参考第二组最初 AMS 原型中的竹林装饰。生成原图 exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png 保留在 generated-originals；工程源 main/assets/bamboo-leaf-v1.png，归档源在 docs/assets/atlases。tools/assets/encode_bamboo.cjs 等比编码为64×64 RGB565+alpha（12,288字节）。运行由统一装饰盒按比例绘制，取代交叉直线搭成的竹架图，不修改整张原型。
 
 提示词原文：
 

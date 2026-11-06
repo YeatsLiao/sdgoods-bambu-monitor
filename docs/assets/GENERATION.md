@@ -4,7 +4,7 @@
 
 原始生成图保存在 generated-originals，保留文件名、原分辨率与 SHA-256；图集源在 atlases，固件编码当前副本在 runtime-encoded，字体源/许可/当前生成物在 fonts。当前副本应与 main/assets、main/fonts 对应；旧哈希变体归 history/assets，不与当前副本混排。
 
-tools/archive_images.py 会校验和归档原图、同步当前资源、先保留旧版再更新当前副本，并将冻结预览放在 docs/history/releases/<版本标签>。image-manifest.json 是机器索引，不是视觉验收记录。
+tools/assets/archive_images.py 会校验和归档原图、同步当前资源、先保留旧版再更新当前副本，并将冻结预览放在 docs/history/releases/<版本标签>。image-manifest.json 是机器索引，不是视觉验收记录。
 
 2026-11-05 重试后，新版 AMS 和第四页详情图片已成功返回，统一归入 design/batch-01，原版保存在 history/design/batch-01。猫咪探头另由内置 ImageGen 根据已确认 AMS 图生成透明源素材，保存为 atlases/cat-peek-v1.png，编码为 runtime-encoded/cat_peek.c（96×64 RGB565+alpha，18,432 字节）。转换只做裁出透明边界、等比缩放和编码，不重画角色。
 

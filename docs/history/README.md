@@ -9,4 +9,4 @@
 
 旧报告中的“通过”仅代表当时报告所列检查，不是用户对当前 UI 还原的认可。当前资料从 [第一批入口](../design/batch-01/README.md) 和 [待修状态](../verification/CURRENT-STATUS.md) 查看。
 
-历史原型、提示词、旧报告与旧资源允许Git跟踪；releases批量冻结帧由完整私有快照保存。具体范围、恢复与校验见 [收尾记录](../verification/closeout-0.3.9.md)。原有历史媒体路径保持不变。
+历史原型、提示词、旧报告与旧资源允许Git跟踪；releases批量冻结帧由完整私有快照保存。具体范围、恢复与校验见 [收尾记录](../verification/reports/closeout-0.3.9.md)。原有历史媒体路径保持不变。

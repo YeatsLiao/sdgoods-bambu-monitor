@@ -28,4 +28,4 @@ mentionRecords 只表示某文档提及该文件，不保证其中有完整提�
 
 ## 更新和检查
 
-先运行 tools/archive_images.py 同步原图和资源镜像，再运行 python tools/catalog_assets.py 更新追溯表。检查命令：python tools/catalog_assets.py --check。完整保存策略见 [GENERATION.md](GENERATION.md)。
+先运行 tools/assets/archive_images.py 同步原图和资源镜像，再运行 python tools/assets/catalog_assets.py 更新追溯表。检查命令：python tools/assets/catalog_assets.py --check。完整保存策略见 [GENERATION.md](GENERATION.md)。

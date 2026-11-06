@@ -1,6 +1,6 @@
 # 第二批还原素材与提示词
 
-工具：内置 ImageGen。参考是第二批最初首页和 AMS 原图，未覆盖最初设计。输出完整保留源字节、透明 alpha 和 SHA，编码脚本 tools/encode_batch2.cjs 只按六格裁出/等比缩放/编码，不重新画角色。
+工具：内置 ImageGen。参考是第二批最初首页和 AMS 原图，未覆盖最初设计。输出完整保留源字节、透明 alpha 和 SHA，编码脚本 tools/assets/encode_batch2.cjs 只按六格裁出/等比缩放/编码，不重新画角色。
 
 ## 六格透明场景与独立头像
 
