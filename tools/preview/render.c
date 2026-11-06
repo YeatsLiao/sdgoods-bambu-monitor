@@ -11,12 +11,14 @@ static bool chinese=true;
 static bool test_pressed,test_cc_open,test_save_fail;
 static lv_point_t test_point;
 static int test_save_count;
+static int test_provision_requests;
+static bool test_provision_enable;
 static monitor_service_status_t test_service={.connected=true};
 static unsigned char framebuffer[360*360*3];
 const monitor_preferences_t *monitor_preferences_get(void) {return &prefs;}
 esp_err_t monitor_preferences_save(const monitor_preferences_t *p) {if(test_save_fail)return -1;test_save_count++;prefs=*p;return 0;}
 void monitor_service_status(monitor_service_status_t *s) {*s=test_service;}
-bool monitor_service_provision(bool enable) {(void)enable;return true;}
+bool monitor_service_provision(bool enable) {test_provision_requests++;test_provision_enable=enable;return true;}
 bool sdg_i18n_is_zh(void) {return chinese;}
 void sdg_i18n_toggle(void) {chinese=!chinese;}
 void sdgoods_lcd_set_backlight(int n) {(void)n;}
@@ -47,6 +49,67 @@ static void touch(bool pressed,int x,int y,uint32_t ms){
 }
 /* Real loop ordering: LVGL's clicked callback runs before the app sees release. */
 static void tap(int x,int y){touch(true,x,y,20);test_pressed=false;on_tap(NULL);touch(false,x,y,20);}
+static void release_with_click(int x,int y){test_pressed=false;on_tap(NULL);touch(false,x,y,20);}
+static void swipe_with_click(int x,int y,int end_x,int end_y){
+    touch(true,x,y,20);touch(true,end_x,end_y,20);release_with_click(end_x,end_y);
+}
+static void settings_swipe_tests(void){
+    test_cc_open=false;s_asleep=false;s_pressed=false;s_service=test_service;
+    int saves=test_save_count,detail=page_count()-1;
+    for(int view=VIEW_SETTINGS;view<=VIEW_NETWORK;view++){
+        s_view=view;s_page=detail;s_last_refresh=lv_tick_get();
+        swipe_with_click(90,155,280,155);
+        assert(s_view==(view==VIEW_SETTINGS?VIEW_MONITOR:VIEW_SETTINGS));
+        assert(s_page==detail&&test_save_count==saves);
+        view_t returned=s_view;touch(false,280,155,20);assert(s_view==returned);
+    }
+    s_view=VIEW_SLEEP;
+    const int rejects[][4]={{100,150,132,150},{240,150,100,150},{140,110,140,220},
+        {100,150,190,205},{100,40,240,40}};
+    for(unsigned i=0;i<sizeof(rejects)/sizeof(*rejects);i++){
+        swipe_with_click(rejects[i][0],rejects[i][1],rejects[i][2],rejects[i][3]);
+        assert(s_view==VIEW_SLEEP&&test_save_count==saves);
+    }
+    touch(true,100,155,20);touch(true,250,155,20);touch(true,100,155,20);
+    release_with_click(100,155);assert(s_view==VIEW_SLEEP&&test_save_count==saves);
+    // A control center or busy transition owns the entire touch, even if it closes.
+    touch(true,90,155,20);test_cc_open=true;touch(true,150,155,20);
+    test_cc_open=false;touch(true,280,155,20);release_with_click(280,155);
+    assert(s_view==VIEW_SLEEP&&test_save_count==saves);
+    touch(true,90,155,20);s_service.busy=true;touch(true,150,155,20);
+    s_service.busy=false;touch(true,280,155,20);release_with_click(280,155);
+    assert(s_view==VIEW_SLEEP&&test_save_count==saves);
+    s_asleep=true;swipe_with_click(90,155,280,155);
+    assert(!s_asleep&&s_view==VIEW_SLEEP&&test_save_count==saves);
+    swipe_with_click(90,155,280,155);assert(s_view==VIEW_SETTINGS);
+    // Provisioning cancels asynchronously through the same safe Back path.
+    s_view=VIEW_NETWORK;s_service.provisioning=test_service.provisioning=true;
+    s_last_refresh=lv_tick_get();int requests=test_provision_requests;
+    swipe_with_click(90,160,280,160);
+    assert(s_view==VIEW_NETWORK&&test_provision_requests==requests+1&&!test_provision_enable);
+    test_service.provisioning=false;touch(false,280,160,501);assert(s_view==VIEW_SETTINGS);
+    tap(66,54);assert(s_view==VIEW_MONITOR&&s_page==detail&&test_save_count==saves);
+    puts("PASS: right swipe returns one settings level; no click/save on drag, short/left/diagonal/vertical/top/reversal guards, wake-only, control-center/busy ownership and async provisioning cancel.");
+}
+static void gear_center_tests(void){
+    int saved_skin=prefs.skin,saved_page=s_page;view_t saved_view=s_view;
+    for(int skin=1;skin<=CONFIG_BAMBU_SKIN_COUNT;skin++){
+        prefs.skin=skin;s_view=VIEW_MONITOR;s_page=page_count()-1;
+        lv_obj_invalidate(s_surface);lv_refr_now(NULL);
+        uint32_t color=lv_color_to32(lv_color_hex(monitor_skin_get(skin)->accent));
+        int left=360,right=0,top=360,bottom=0,count=0;
+        for(int y=DETAIL_SETTINGS_CY-12;y<=DETAIL_SETTINGS_CY+12;y++)for(int x=DETAIL_SETTINGS_CX-12;x<=DETAIL_SETTINGS_CX+12;x++){
+            int i=(y*360+x)*3;
+            if(framebuffer[i]!=(uint8_t)(color>>16)||framebuffer[i+1]!=(uint8_t)(color>>8)||framebuffer[i+2]!=(uint8_t)color)continue;
+            left=LV_MIN(left,x);right=LV_MAX(right,x);top=LV_MIN(top,y);bottom=LV_MAX(bottom,y);count++;
+        }
+        assert(count>40&&abs(left+right-2*DETAIL_SETTINGS_CX)<=1&&abs(top+bottom-2*DETAIL_SETTINGS_CY)<=1);
+        assert(detail_settings_hit((lv_point_t){DETAIL_SETTINGS_CX,DETAIL_SETTINGS_CY}));
+        assert(!detail_settings_hit((lv_point_t){DETAIL_SETTINGS_CX+23,DETAIL_SETTINGS_CY}));
+    }
+    prefs.skin=saved_skin;s_page=saved_page;s_view=saved_view;
+    puts("PASS: all 18 actual gear pixel bounds share the circular button center; matching padded hit target.");
+}
 static void picker_tests(void){
     s_service=test_service;s_view=VIEW_MONITOR;s_page=0;prefs.skin=1;s_pressed=false;s_asleep=false;
     s_tap_suppressed=s_wake_touch=false;
@@ -182,6 +245,23 @@ int main(int argc,char **argv) {
     chinese=true;prefs.skin=1;
     for(int skin=1;skin<=18;skin++){prefs.skin=skin;s_view=VIEW_MONITOR;s_page=2;snprintf(name,sizeof(name),"skin-%02d-external",skin);shot(argv[1],name);}
     bambu_state_t sample=s_data;
+    gear_center_tests();
+    /* Replay the user's white/unknown tray and completed X1C detail cards. */
+    prefs.skin=10;s_view=VIEW_MONITOR;s_page=1;s_data=sample;s_data.active_unit_id=-1;s_data.active_slot_id=-1;
+    const char *feedback_colors[]={"000000","FFFFFF","F5D800","BBCE00"};
+    const int feedback_remain[]={40,-1,13,28};
+    for(int i=0;i<4;i++){
+        strcpy(s_data.units[0].slots[i].color,feedback_colors[i]);
+        strcpy(s_data.units[0].slots[i].type,i?"PLA":"PETG");
+        s_data.units[0].slots[i].remain=feedback_remain[i];
+    }
+    shot(argv[1],"feedback-bamboo-unknown");
+    s_data.units[0].slots[1].remain=0;shot(argv[1],"feedback-bamboo-empty");
+    s_data=sample;prefs.skin=13;s_page=page_count()-1;s_data.state=BAMBU_STATE_FINISH;
+    strcpy(s_data.printer_model,"X1C");s_data.layer_num=s_data.total_layer=750;
+    s_data.nozzle_temp=29;s_data.nozzle_target=0;s_data.bed_temp=25;s_data.bed_target=0;
+    s_data.chamber_temp=29;s_data.valid_mask|=BAMBU_VALID_CHAMBER;
+    shot(argv[1],"feedback-farm-details");s_data=sample;
     for(int skin=1;skin<=18;skin++){
         prefs.skin=skin;s_view=VIEW_MONITOR;s_page=0;s_data=sample;s_data.mc_percent=100;s_data.mc_remaining=1000000;strcpy(s_data.printer_model,"H2D Pro");
         snprintf(name,sizeof(name),"skin-%02d-progress-100",skin);shot(argv[1],name);
@@ -264,6 +344,7 @@ int main(int argc,char **argv) {
     assert(ui_monitor_back()&&s_view==VIEW_MONITOR);
     assert(!ui_monitor_back());
     picker_tests();
+    settings_swipe_tests();
     s_tap_suppressed=s_wake_touch=false;
     s_view=VIEW_SLEEP;prefs.sleep_min=0;s_last_point=(lv_point_t){180,109};
     on_tap(NULL);assert(prefs.sleep_min==1);on_tap(NULL);assert(prefs.sleep_min==5);on_tap(NULL);assert(prefs.sleep_min==15);on_tap(NULL);assert(prefs.sleep_min==0);

@@ -76,6 +76,50 @@ int main(int argc, char **argv) {
     bambu_state_begin_connection();
     assert(!g_bambu_state.printer_model[0]);
 
+    // Real X1C OTA spelling (hyphen) differs from Studio's profile name.
+    // Identity must update the UI without satisfying pairing/freshness checks.
+    const char *x1c = "{\"info\":{\"command\":\"get_version\",\"result\":\"success\",\"module\":[{\"name\":\"ota\",\"product_name\":\"Bambu Lab X1-Carbon\",\"hw_ver\":\"N/A\"},{\"name\":\"ams/0\",\"product_name\":\"AMS (1)\"}]}}";
+    assert(!bambu_report_apply(x1c, strlen(x1c), ++now));
+    char model[24]; bambu_state_model_copy(model);
+    assert(!strcmp(model, "X1C"));
+    assert(!g_bambu_state.data_valid && !g_bambu_state.last_update_ms);
+    assert(!bambu_report_validate(x1c, strlen(x1c)));
+    APPLY("{\"print\":{\"nozzle_temper\":23}}");
+    assert(!strcmp(g_bambu_state.printer_model, "X1C"));
+    IGNORE("{\"info\":{\"command\":\"get_version\",\"module\":[{\"name\":\"ams/0\",\"product_name\":\"Bambu Lab X1-Carbon\"}]}}");
+    assert(!strcmp(g_bambu_state.printer_model, "X1C"));
+    bambu_state_begin_connection();
+    IGNORE("{\"info\":{\"command\":\"get_version\",\"module\":[{\"name\":\"esp32\",\"hw_ver\":\"AP05\"},{\"name\":\"ams/0\",\"product_name\":\"Bambu Lab X1-Carbon\"}]}}");
+    bambu_state_model_copy(model);
+    assert(!model[0]); // Shared board revisions and AMS names aren't host identity.
+
+    const char *model_inputs[][2] = {
+        {"BL-P001","X1C"},{"BL-P002","X1"},{"C13","X1E"},
+        {"C11","P1P"},{"C12","P1S"},{"N7","P2S"},{"N2S","A1"},{"N1","A1 mini"},
+        {"O1D","H2D"},{"O1E","H2D Pro"},{"O1S","H2S"},{"O1C2","H2C"},{"N6","X2D"},{"N9","A2L"},
+        {"Bambu Lab X1-Carbon","X1C"},{" Bambu Lab a1 MINI ","A1 mini"},
+        {"Bambu Lab H2D-Pro","H2D Pro"},{"bambu lab p2s","P2S"},{"Bambu Lab H3C","H3C"},
+        {"Bambu Lab X1","X1"},{"Bambu Lab X1E","X1E"},{"Bambu Lab P1P","P1P"},
+        {"Bambu Lab P1S","P1S"},{"Bambu Lab A1","A1"},{"Bambu Lab H2D","H2D"},
+        {"Bambu Lab H2S","H2S"},{"Bambu Lab H2C","H2C"},{"Bambu Lab X2D","X2D"},{"Bambu Lab A2L","A2L"},
+    };
+    for(unsigned i=0;i<sizeof(model_inputs)/sizeof(*model_inputs);i++){
+        char json[256];bambu_state_begin_connection();
+        snprintf(json,sizeof(json),"{\"print\":{\"printer_type\":\"%s\"}}",model_inputs[i][0]);
+        IGNORE(json);bambu_state_model_copy(model);assert(!strcmp(model,model_inputs[i][1]));
+        assert(!g_bambu_state.data_valid&&!g_bambu_state.last_update_ms);
+        bambu_state_begin_connection();
+        snprintf(json,sizeof(json),"{\"info\":{\"command\":\"get_version\",\"module\":[{\"name\":\"ota\",\"product_name\":\"%s\"}]}}",model_inputs[i][0]);
+        IGNORE(json);bambu_state_model_copy(model);assert(!strcmp(model,model_inputs[i][1]));
+    }
+    const char *not_models[]={"AP05","AMS HT","A1 mini extra","H2D Prototyping","X1 Carbon AMS","","UNKNOWN"};
+    for(unsigned i=0;i<sizeof(not_models)/sizeof(*not_models);i++){
+        char json[128];bambu_state_begin_connection();
+        snprintf(json,sizeof(json),"{\"print\":{\"printer_type\":\"%s\"}}",not_models[i]);
+        IGNORE(json);bambu_state_model_copy(model);assert(!model[0]);
+    }
+    puts("PASS: 15 model names, 14 official model codes, normalized aliases, exact family matches and identity isolation.");
+
     assert(bambu_pages_count(&g_bambu_state)==2);
     bambu_state_t pages;bambu_state_reset(&pages);
     pages.external_present=true;

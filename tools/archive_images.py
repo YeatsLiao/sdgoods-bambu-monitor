@@ -6,6 +6,7 @@ import argparse,hashlib,json,shutil
 ROOT=Path(__file__).resolve().parents[1]
 IMAGE_TYPES={'.png','.jpg','.jpeg','.webp','.gif','.ppm'}
 LABELS={
+    'exec-b97da973-3bc5-457f-8b0c-bf80a73b1e1c.png':'竹林装饰填色透明竹叶精修',
     'exec-f173ffde-bf80-4221-8a0c-6c6b9ae78d99.png':'第三批最初原型还原用六大场景 v2',
     'exec-6ca75823-f37f-4268-9b00-cc23fd33d6fe.png':'第三批角色横幅初稿 v1',
     'exec-46c51f3b-96cb-480b-8428-7045ae480725.png':'第三批角色内收横幅 v2',
@@ -75,10 +76,14 @@ def main():
         item={'path':src.relative_to(ROOT).as_posix(),'bytes':src.stat().st_size,'sha256':digest(src)}
         if src.suffix.lower() in IMAGE_TYPES:images.append(item)
         elif src.suffix.lower()=='.bin' or src.is_relative_to(ROOT/'docs/assets/runtime-encoded') or src.is_relative_to(ROOT/'docs/assets/fonts') or src.is_relative_to(ROOT/'docs/history/assets'):resources.append(item)
-    manifest={'generatedSource':str(source),'generatedOriginals':generated,'images':images,'resources':resources,'generatedCount':len(generated),'docsImageCount':len(images),'allGeneratedBytesVerified':True}
+    old_manifest=ROOT/'docs/assets/image-manifest.json'
+    previous=json.loads(old_manifest.read_text(encoding='utf-8')) if old_manifest.exists() else {}
+    origin=previous.get('originalGenerationCache',previous.get('generatedSource'))
+    if source.resolve()!=(ROOT/'docs/assets/generated-originals').resolve():origin=str(source.resolve())
+    manifest={'generatedSource':str(source.resolve()),'originalGenerationCache':origin,'generatedOriginals':generated,'images':images,'resources':resources,'generatedCount':len(generated),'docsImageCount':len(images),'allGeneratedBytesVerified':True}
     target=ROOT/'docs/assets'
     (target/'image-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
-    lines=['# 素材入口','', '**当前原型只看 [第一批基准](../design/batch-01/README.md)**。这里保存源素材和资源副本，不能把软件截图或临时角色认作已批准原型。','',
+    lines=['# 素材入口','', '按皮肤查原图、图集和编码请从 [素材导航](CATALOG.md) 进入。','', '**当前原型只看 [第一批基准](../design/batch-01/README.md)**。这里保存源素材和资源副本，不能把软件截图或临时角色认作已批准原型。','',
         '- [generated-originals](generated-originals/)：全部生成原图，保留原名与源字节。',
         '- [atlases](atlases/)：独立插画源图，不包含实时数据。',
         '- [runtime-encoded](runtime-encoded/)：与 main/assets 对应的当前编码副本；未通过视觉验收的候选同样会归档，归档不等于批准。',
